@@ -1,0 +1,840 @@
+local success, WindUI = pcall(function()
+    return loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+end)
+if not success or not WindUI then
+    warn("❌ Failed to load WindUI")
+    return
+end
+
+-- 🌈 Add all themes
+local themeNames = {
+    "Ocean Blue","Forest Green","Minimal Light","Retro Purple","Sunset",
+    "Neon Pulse","Steel Phantom","Vaporwave","Deep Sea","Sepia Warmth",
+    "Monokai Dark","Solarized Light","Cherry Blossom","Charcoal Gold",
+    "Icy Mint","Volcano","Amethyst","Pastel Dream","Coffee Shop","Cyberpunk Red"
+}
+
+-- Example: Adding all themes
+local themeColors = {
+    ["Ocean Blue"] = {Accent="#0B5394", Dialog="#0A3D6B", Outline="#6DACEA", Text="#EBF5FF", Placeholder="#85AECF", Background="#051A2E", Button="#1C67A8", Icon="#A9D5FD"},
+    ["Forest Green"] = {Accent="#1A5E2E", Dialog="#114220", Outline="#8AC79B", Text="#E9FCE9", Placeholder="#79A378", Background="#0A2B14", Button="#2B7A42", Icon="#B3E3C1"},
+    ["Minimal Light"] = {Accent="#F3F4F6", Dialog="#FFFFFF", Outline="#4B5563", Text="#1F2937", Placeholder="#9CA3AF", Background="#F9FAFB", Button="#E5E7EB", Icon="#4B5563"},
+    ["Retro Purple"] = {Accent="#7E22CE", Dialog="#4A148C", Outline="#F0ABFC", Text="#FDF4FF", Placeholder="#BC8FDD", Background="#2D0557", Button="#9333EA", Icon="#F0ABFC"},
+    ["Sunset"] = {Accent="#FF8847", Dialog="#CC5500", Outline="#FFD9C0", Text="#FFF7F0", Placeholder="#FFC099", Background="#331A00", Button="#FF7043", Icon="#FFD9C0"},
+    ["Neon Pulse"] = {Accent="#00FF00", Dialog="#111111", Outline="#00FFFF", Text="#FFFFFF", Placeholder="#008800", Background="#000000", Button="#39FF14", Icon="#00FFFF"},
+    ["Steel Phantom"] = {Accent="#404040", Dialog="#262626", Outline="#A3A3A3", Text="#D4D4D4", Placeholder="#737373", Background="#171717", Button="#525252", Icon="#A3A3A3"},
+    ["Vaporwave"] = {Accent="#FF00FF", Dialog="#1B001B", Outline="#00FFFF", Text="#FFFFFF", Placeholder="#FF69FF", Background="#0A0014", Button="#E75480", Icon="#00FFFF"},
+    ["Deep Sea"] = {Accent="#008B8B", Dialog="#005A5A", Outline="#80CBC4", Text="#E0FFFF", Placeholder="#4DB6AC", Background="#003636", Button="#00A3A3", Icon="#80CBC4"},
+    ["Sepia Warmth"] = {Accent="#7B3F00", Dialog="#5C3200", Outline="#D2B48C", Text="#F5E8D6", Placeholder="#A98F70", Background="#3D291F", Button="#9D5B18", Icon="#D2B48C"},
+    ["Monokai Dark"] = {Accent="#F92672", Dialog="#272822", Outline="#66D9EF", Text="#F8F8F2", Placeholder="#75715E", Background="#1C1E1A", Button="#A6E22E", Icon="#66D9EF"},
+    ["Solarized Light"] = {Accent="#268BD2", Dialog="#FDF6E3", Outline="#93A1A1", Text="#586E75", Placeholder="#839496", Background="#EEE8D5", Button="#B58900", Icon="#268BD2"},
+    ["Cherry Blossom"] = {Accent="#F9BCCB", Dialog="#FFFAFD", Outline="#D96985", Text="#4A1429", Placeholder="#C397A3", Background="#FFF7F9", Button="#E68A9F", Icon="#D96985"},
+    ["Charcoal Gold"] = {Accent="#FFD700", Dialog="#2C2C2C", Outline="#C0C0C0", Text="#F5F5F5", Placeholder="#6E6E6E", Background="#1D1D1D", Button="#B8860B", Icon="#FFD700"},
+    ["Icy Mint"] = {Accent="#40E0D0", Dialog="#F0FFFF", Outline="#81D4FA", Text="#004D40", Placeholder="#B2DFDB", Background="#E0FFFF", Button="#80CBC4", Icon="#40E0D0"},
+    ["Volcano"] = {Accent="#B22222", Dialog="#1C1C1C", Outline="#FF6347", Text="#EBEBEB", Placeholder="#704747", Background="#0A0A0A", Button="#FF4500", Icon="#FF6347"},
+    ["Amethyst"] = {Accent="#9966CC", Dialog="#36284C", Outline="#CCFF66", Text="#EDE9F2", Placeholder="#8A72A4", Background="#221A33", Button="#7A52AA", Icon="#CCFF66"},
+    ["Pastel Dream"] = {Accent="#FFB3BA", Dialog="#FAF3E0", Outline="#BAE1FF", Text="#333333", Placeholder="#C1B4A5", Background="#FFFFFF", Button="#BAE1FF", Icon="#FFB3BA"},
+    ["Coffee Shop"] = {Accent="#795548", Dialog="#F5F5DC", Outline="#A1887F", Text="#3E2723", Placeholder="#BCB0A4", Background="#FFF8E1", Button="#D7CCC8", Icon="#795548"},
+    ["Cyberpunk Red"] = {Accent="#FF3333", Dialog="#080008", Outline="#33FFFF", Text="#FDFDFD", Placeholder="#771111", Background="#000000", Button="#CC0000", Icon="#33FFFF"}
+}
+
+-- Add all themes to WindUI
+for name, colors in pairs(themeColors) do
+    WindUI:AddTheme({
+        Name = name,
+        Accent = Color3.fromHex(colors.Accent),
+        Dialog = Color3.fromHex(colors.Dialog),
+        Outline = Color3.fromHex(colors.Outline),
+        Text = Color3.fromHex(colors.Text),
+        Placeholder = Color3.fromHex(colors.Placeholder),
+        Background = Color3.fromHex(colors.Background),
+        Button = Color3.fromHex(colors.Button),
+        Icon = Color3.fromHex(colors.Icon)
+    })
+end
+
+WindUI:SetTheme("Volcano") -- default
+
+local function GradientText(text, color1, color2)
+    local result = ""
+    for i = 1, #text do
+        local t = (i - 1) / (#text - 1)
+        local r = color1.R + (color2.R - color1.R) * t
+        local g = color1.G + (color2.G - color1.G) * t
+        local b = color1.B + (color2.B - color1.B) * t
+        local hex = string.format("#%02X%02X%02X", r * 255, g * 255, b * 255)
+        result = result .. string.format('<font color="%s">%s</font>', hex, text:sub(i, i))
+    end
+    return result
+end
+
+local Window = WindUI:CreateWindow({
+    Title = "RyZen Hub",
+    Icon = "rbxassetid://84501312005643",
+    IconThemed = true,
+    Author = "By @mallo",
+    Size = UDim2.fromOffset(580, 460),
+    Resizable = true,
+    Transparent = true,
+    User = {
+        Enabled = true,
+        Anonymous = False,
+        Callback = function()
+            print("clicked")
+        end,
+    },
+})
+
+Window:Tag({
+    Title = "Tester",
+    Color = Color3.fromHex("#30ff6a"),
+    Radius = 10, -- from 0 to 13
+})
+
+Window:Tag({
+    Title = "99 nights",
+    Color = Color3.fromHex("#30ff6a"),
+    Radius = 10, -- from 0 to 13
+})
+
+Window:Tag({
+    Title = "Beta",
+    Color = Color3.fromHex("#30ff6a"),
+    Radius = 10, -- from 0 to 13
+})
+
+Window:SetIconSize(50) -- default is 20
+
+Window:EditOpenButton({
+    Title = "RyZen Hub",
+    Icon = "rbxassetid://84501312005643",
+    CornerRadius = UDim.new(0,16),
+    StrokeThickness = 2,
+    Color = ColorSequence.new( -- gradient
+        Color3.fromHex("ADD8E6"), 
+        Color3.fromHex("00008B")
+    ),
+    OnlyMobile = false,
+    Enabled = true,
+    Draggable = true,
+})
+
+Window:DisableTopbarButtons({ "Close" })
+
+local Info = Window:Tab({Title = "Information", Icon = "info" })
+
+local InviteCode = "KG9ADqwT9Q" -- change to your discord invite
+local DiscordAPI = "https://discord.com/api/v10/invites/" .. InviteCode .. "?with_counts=true&with_expiration=true"
+
+local Response
+local ErrorMessage = nil
+
+xpcall(function()
+    Response = game:GetService("HttpService"):JSONDecode(WindUI.Creator.Request({
+        Url = DiscordAPI,
+        Method = "GET",
+        Headers = {
+            ["Accept"] = "application/json"
+        }
+    }).Body)
+end, function(err)
+    warn("err fetching discord info: " .. tostring(err))
+    ErrorMessage = tostring(err)
+    Response = nil
+end)
+
+if Response and Response.guild then
+    local ParagraphConfig = {
+        Title = Response.guild.name,
+        Desc =
+            ' <font color="#52525b">•</font> Member Count: ' .. tostring(Response.approximate_member_count) ..
+            '\n <font color="#16a34a">•</font> Online Count: ' .. tostring(Response.approximate_presence_count)
+        ,
+        Image = "https://cdn.discordapp.com/icons/" .. Response.guild.id .. "/" .. Response.guild.icon .. ".png?size=256",
+        ImageSize = 42,
+        Buttons = {
+            {
+                Icon = "link",
+                Title = "Copy Discord Invite",
+                Callback = function()
+                    pcall(function()
+                        setclipboard("https://discord.gg/" .. InviteCode)
+                    end)
+                end
+            },
+            {
+                Icon = "refresh-cw",
+                Title = "Update Info",
+                Callback = function()
+                    xpcall(function()
+                        local UpdatedResponse = game:GetService("HttpService"):JSONDecode(WindUI.Creator.Request({
+                            Url = DiscordAPI,
+                            Method = "GET",
+                        }).Body)
+                        
+                        if UpdatedResponse and UpdatedResponse.guild then
+                            DiscordInfo:SetDesc(
+                                ' <font color="#52525b">•</font> Member Count: ' .. tostring(UpdatedResponse.approximate_member_count) ..
+                                '\n <font color="#16a34a">•</font> Online Count: ' .. tostring(UpdatedResponse.approximate_presence_count)
+                            )
+                        end
+                    end, function(err)
+                        warn("err updating discord info: " .. tostring(err))
+                    end)
+                end
+            }
+        }
+    }
+    
+    if Response.guild.banner then
+        ParagraphConfig.Thumbnail = "https://cdn.discordapp.com/banners/" .. Response.guild.id .. "/" .. Response.guild.banner .. ".png?size=256"
+        ParagraphConfig.ThumbnailSize = 80
+    end
+    
+    local DiscordInfo = Info:Paragraph(ParagraphConfig)
+else
+    Info:Paragraph({
+        Title = "Error when receiving information about the Discord server",
+        Desc = ErrorMessage or "Unknown error occurred",
+        Image = "triangle-alert",
+        ImageSize = 26,
+        Color = "Red",
+    })
+end
+
+-- 📘 Game Information Box (like “Bubble Gum Simulator INFINITY”)
+local GameInfo = Info:Paragraph({
+    Title = GradientText("PanScript", Color3.fromRGB(173, 216, 230), Color3.fromRGB(0, 0, 139)),
+    Desc = "Script made by @mallo",
+    Color = "White",
+})
+
+-- 🎮 Supported Games Tab
+local SupportedGamesTab = Window:Tab({
+    Title = "Supported Games!", 
+    Icon = "gamepad",
+})
+
+Window:Divider()
+
+-- 🏠 Main Tab
+local Tab = Window:Tab({
+    Title = "Main",
+    Icon = "Eye",
+})
+
+RunService = game:GetService("RunService")
+Players = game:GetService("Players")
+Lighting = game:GetService("Lighting")
+LocalPlayer = Players.LocalPlayer
+
+-- ====== ITEM LISTS (from your message) ======
+ItemsList = {
+    "All",
+    "Bolt", "Tyre", "Sheet Metal", "Old Radio", "Broken Fan",
+    "Broken Microwave", "Washing Machine", "Old Car Engine",
+    "UFO Scrap", "UFO Component", "UFO Junk", "Cultist Gem", "Gem of the Forest"
+}
+
+FuelList = {
+    "All",
+    "Corpse", "Sapling", "Alien", "Log", "Chair",
+    "Coal", "Fuel Canister", "Oil Barrel", "Biofuel"
+}
+
+FoodList = {
+    "All",
+    "Carrot", "Berry", "Morsel", "Steak", "Ribs",
+    "Cooked Morsel", "Cooked Steak", "Cooked Ribs",
+    "Bandage", "Medkit", "Chili"
+}
+
+WeaponList = {
+    "All",
+    "Morning star", "Laser Sword", "Raygun", "Chainsaw", "Strong Axe",
+    "Spear", "Good Axe", "Revolver", "Rifle", "Tactical Shotgun",
+    "Revolver Ammo", "Rifle Ammo", "Alien Armour", "Leather Body",
+    "Iron Body", "Thorn Body", "Riot Shield"
+}
+
+OthersList = {
+    "All",
+    "Sack", "Seed Box", "Chainsaw", "Old Flashlight", "Strong Flastlight",
+    "Bunny Foot", "Wolf Pelt", "Bear Pelt", "Alpha Wolf Pet",
+    "Artic Fox Pelt", "Polar Bear Pelt", "Mammoth Tusk", "Flowers",
+    "Coin Stack",
+}
+
+-- ====== CONFIG ======
+MAX_DISPLAY_DISTANCE = 300 -- default shown as "300m" in your UI label; script will show actual distance
+ESP_UPD_INTERVAL = 0 -- use RenderStepped (0) for real time
+
+-- ====== INTERNAL STATE ======
+state = {
+    selections = {
+        gears = {"All"},
+        fuels = {"All"},
+        food = {"All"},
+        weapons = {"All"},
+        others = {"All"},
+    },
+    espName = { -- per category enabled/disabled
+        gears = true,
+        fuels = true,
+        food = false,
+        weapons = false,
+        others = false,
+        children = false,
+        chests = false
+    },
+    espHighlight = {
+        gears = true,
+        fuels = true,
+        food = false,
+        weapons = false,
+        others = false,
+        children = false,
+        chests = false
+    },
+    espObjects = {}, -- maps instance -> {billboard=..., highlight=...}
+    running = true,
+    savedLighting = {}, -- store originals to restore
+    blackScreenGui = nil,
+}
+
+-- ====== HELPERS ======
+function getPrimaryPart(obj)
+    if not obj then return nil end
+    if obj:IsA("BasePart") then return obj end
+    if obj:IsA("Model") then
+        if obj.PrimaryPart and obj.PrimaryPart:IsA("BasePart") then return obj.PrimaryPart end
+        for _,c in ipairs(obj:GetDescendants()) do
+            if c:IsA("BasePart") then return c end
+        end
+    end
+    return nil
+end
+
+function safeNameOf(inst)
+    if not inst then return "Unknown" end
+    if inst.Name then return inst.Name end
+    return tostring(inst)
+end
+
+function createBillboardFor(obj)
+    if not obj then return end
+    local adornee = getPrimaryPart(obj)
+    if not adornee then return end
+
+    if state.espObjects[obj] and state.espObjects[obj].billboard then return end
+
+    local screenGui = state.espObjects.__ScreenGui
+    if not screenGui then
+        screenGui = Instance.new("ScreenGui")
+        screenGui.Name = "ESP_ScreenGui"
+        screenGui.ResetOnSpawn = false
+        screenGui.Parent = game:GetService("CoreGui")
+        state.espObjects.__ScreenGui = screenGui
+    end
+
+    local bb = Instance.new("BillboardGui")
+    bb.Name = "ESP_BB"
+    bb.Adornee = adornee
+    bb.Size = UDim2.new(0, 200, 0, 30)
+    bb.AlwaysOnTop = true
+    bb.StudsOffset = Vector3.new(0, 2, 0)
+    bb.Parent = screenGui
+
+    local label = Instance.new("TextLabel")
+    label.Name = "ESP_Label"
+    label.Size = UDim2.fromScale(1,1)
+    label.BackgroundTransparency = 1
+    label.Font = Enum.Font.SourceSansBold
+    label.TextSize = 14
+    label.TextStrokeTransparency = 0.6
+    label.TextColor3 = Color3.new(1,1,1)
+    label.Text = safeNameOf(obj)
+    label.Parent = bb
+
+    state.espObjects[obj] = state.espObjects[obj] or {}
+    state.espObjects[obj].billboard = bb
+    state.espObjects[obj].label = label
+end
+
+function removeBillboardFor(obj)
+    if state.espObjects[obj] and state.espObjects[obj].billboard then
+        pcall(function() state.espObjects[obj].billboard:Destroy() end)
+        state.espObjects[obj].billboard = nil
+        state.espObjects[obj].label = nil
+    end
+end
+
+function createHighlightFor(obj)
+    if not obj then return end
+    if state.espObjects[obj] and state.espObjects[obj].highlight then return end
+
+    -- Try to use Roblox Highlight (newer class), else fallback to SelectionBox
+    local ok, highlight = pcall(function()
+        local h = Instance.new("Highlight")
+        h.Name = "ESP_Highlight"
+        h.Adornee = obj
+        h.Parent = game:GetService("CoreGui")
+        -- choose nice defaults
+        h.DepthMode = Enum.HighlightDepthMode.Occluded
+        return h
+    end)
+
+    if not ok or not highlight then
+        local adorn = Instance.new("SelectionBox")
+        adorn.Name = "ESP_SelectionBox"
+        local prim = getPrimaryPart(obj)
+        if prim then
+            adorn.Adornee = prim
+            adorn.Parent = game:GetService("CoreGui")
+            adorn.LineThickness = 0.05
+            adorn.SurfaceTransparency = 1
+            adorn.Color3 = Color3.new(1,0,0)
+            state.espObjects[obj] = state.espObjects[obj] or {}
+            state.espObjects[obj].highlight = adorn
+            return
+        else
+            return
+        end
+    end
+
+    -- store highlight
+    state.espObjects[obj] = state.espObjects[obj] or {}
+    state.espObjects[obj].highlight = highlight
+end
+
+function removeHighlightFor(obj)
+    if state.espObjects[obj] and state.espObjects[obj].highlight then
+        pcall(function() state.espObjects[obj].highlight:Destroy() end)
+        state.espObjects[obj].highlight = nil
+    end
+end
+
+function destroyESPFor(obj)
+    removeBillboardFor(obj)
+    removeHighlightFor(obj)
+    if state.espObjects[obj] then state.espObjects[obj] = nil end
+end
+
+function isMatch(name, selections)
+    if not selections then return false end
+    -- if "All" is selected, return true
+    for _,v in ipairs(selections) do
+        if v == "All" then return true end
+        if v == name then return true end
+    end
+    return false
+end
+
+-- ====== CATEGORY CHECKS ======
+function getCategoryOfItem(item)
+    local n = safeNameOf(item)
+    for _,v in ipairs(ItemsList) do if v == n then return "gears" end end
+    for _,v in ipairs(FuelList) do if v == n then return "fuels" end end
+    for _,v in ipairs(FoodList) do if v == n then return "food" end end
+    for _,v in ipairs(WeaponList) do if v == n then return "weapons" end end
+    for _,v in ipairs(OthersList) do if v == n then return "others" end end
+    -- fallback: try to categorize by name keywords
+    local lname = n:lower()
+    if lname:find("fuel") or lname:find("coal") or lname:find("canister") then return "fuels" end
+    if lname:find("axe") or lname:find("revolver") or lname:find("rifle") or lname:find("spear") then return "weapons" end
+    return nil
+end
+
+-- ====== UI Creation function ======
+function CreateVisuals(Tab)
+    -- If no Tab is provided, create a clear "Visuals" tab so dropdowns and toggles don't show as nil.
+    if not Tab then
+        Tab = Window:Tab({ Title = "Visuals", Icon = "eye" })
+    end
+
+    -- Dropdowns
+    Tab:Dropdown({
+        Title = "Gears (multi)",
+        Desc = "Select gears to ESP",
+        Values = ItemsList,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(option)
+            state.selections.gears = option
+        end
+    })
+
+    Tab:Dropdown({
+        Title = "Fuels (multi)",
+        Desc = "Select fuels to ESP",
+        Values = FuelList,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(option)
+            state.selections.fuels = option
+        end
+    })
+
+    Tab:Dropdown({
+        Title = "Food/Healing (multi)",
+        Desc = "Select food/healing items",
+        Values = FoodList,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(option)
+            state.selections.food = option
+        end
+    })
+
+    Tab:Dropdown({
+        Title = "Weapons (multi)",
+        Desc = "Select weapons to ESP",
+        Values = WeaponList,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(option)
+            state.selections.weapons = option
+        end
+    })
+
+    Tab:Dropdown({
+        Title = "Others (multi)",
+        Desc = "Select other items",
+        Values = OthersList,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(option)
+            state.selections.others = option
+        end
+    })
+
+    -- Toggles (esp name & highlight) for categories
+    local function makePair(titlebase, key)
+        Tab:Toggle({
+            Title = titlebase .. " - ESP name",
+            Desc = "Show name text above items",
+            Icon = "tag",
+            Type = "Checkbox",
+            Value = state.espName[key],
+            Callback = function(val)
+                state.espName[key] = val
+                -- immediate update: remove or create for existing items
+                -- cleanup existing for this category if toggled off
+                if not val then
+                    for inst,_ in pairs(state.espObjects) do
+                        if inst ~= "__ScreenGui" then
+                            local cat = getCategoryOfItem(inst)
+                            if cat == key then removeBillboardFor(inst) end
+                        end
+                    end
+                end
+            end
+        })
+
+        Tab:Toggle({
+            Title = titlebase .. " - ESP highlight",
+            Desc = "Highlight the item",
+            Icon = "highlight",
+            Type = "Checkbox",
+            Value = state.espHighlight[key],
+            Callback = function(val)
+                state.espHighlight[key] = val
+                if not val then
+                    for inst,_ in pairs(state.espObjects) do
+                        if inst ~= "__ScreenGui" then
+                            local cat = getCategoryOfItem(inst)
+                            if cat == key then removeHighlightFor(inst) end
+                        end
+                    end
+                end
+            end
+        })
+    end
+
+    makePair("Gears", "gears")
+    makePair("Fuels", "fuels")
+    makePair("Food", "food")
+    makePair("Weapons", "weapons")
+    makePair("Others", "others")
+
+    -- Child ESP
+    Tab:Toggle({
+        Title = "Child ESP (players' children)",
+        Desc = "Show ESP for NPC children in workspace.characters",
+        Icon = "child",
+        Type = "Checkbox",
+        Value = state.espName.children,
+        Callback = function(val)
+            state.espName.children = val
+            state.espHighlight.children = val
+        end
+    })
+
+    -- Chest ESP (generic chest toggle)
+   Tab:Toggle({
+        Title = "Chest ESP",
+        Desc = "Show chests (items named Chest or Box)",
+        Icon = "box",
+        Type = "Checkbox",
+        Value = state.espName.chests,
+        Callback = function(val)
+            state.espName.chests = val
+            state.espHighlight.chests = val
+        end
+    })
+
+    -- Graphics controls
+    -- Save original lighting values
+    function saveLighting()
+        if state.savedLighting._saved then return end
+        local L = Lighting
+        state.savedLighting.Ambient = L.Ambient
+        state.savedLighting.Brightness = L.Brightness
+        state.savedLighting.FogEnd = L.FogEnd
+        state.savedLighting.FogStart = L.FogStart
+        state.savedLighting.GlobalShadows = L.GlobalShadows
+        state.savedLighting._saved = true
+    end
+
+    Tab:Toggle({
+        Title = "Remove Fog",
+        Desc = "Eliminate fog for farther visibility",
+        Icon = "sun",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(val)
+            saveLighting()
+            if val then
+                Lighting.FogEnd = 1e6
+                Lighting.FogStart = 0
+            else
+                if state.savedLighting._saved then
+                    Lighting.FogEnd = state.savedLighting.FogEnd
+                    Lighting.FogStart = state.savedLighting.FogStart
+                end
+            end
+        end
+    })
+
+    Tab:Toggle({
+        Title = "Lower Graphics (safe)",
+        Desc = "Reduce some effects to improve FPS",
+        Icon = "cpu",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(val)
+            saveLighting()
+            if val then
+                Lighting.GlobalShadows = false
+                -- try to reduce terrain water reflections if present:
+                pcall(function()
+                    if workspace:FindFirstChildOfClass("Terrain") then
+                        workspace.Terrain.WaterWaveSize = 0
+                        workspace.Terrain.WaterWaveSpeed = 0
+                    end
+                end)
+            else
+                if state.savedLighting._saved then
+                    Lighting.GlobalShadows = state.savedLighting.GlobalShadows
+                end
+            end
+        end
+    })
+
+    Tab:Toggle({
+        Title = "Full Bright",
+        Desc = "Make the world bright (store original values, toggle to restore)",
+        Icon = "flash",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(val)
+            saveLighting()
+            if val then
+                Lighting.Ambient = Color3.new(1,1,1)
+                Lighting.Brightness = 2
+            else
+                if state.savedLighting._saved then
+                    Lighting.Ambient = state.savedLighting.Ambient
+                    Lighting.Brightness = state.savedLighting.Brightness
+                end
+            end
+        end
+    })
+
+    -- Black screen toggle: creates a fullscreen black GUI
+    Tab:Toggle({
+        Title = "Black Screen",
+        Desc = "Toggle a black screen overlay (useful for screenshots)",
+        Icon = "eye-off",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(val)
+            if val then
+                if state.blackScreenGui and state.blackScreenGui.Parent then return end
+                local sg = Instance.new("ScreenGui")
+                sg.Name = "BlackScreenGui"
+                sg.ResetOnSpawn = false
+                sg.Parent = game:GetService("CoreGui")
+                local f = Instance.new("Frame", sg)
+                f.Size = UDim2.fromScale(1,1)
+                f.Position = UDim2.fromOffset(0,0)
+                f.BackgroundColor3 = Color3.new(0,0,0)
+                f.BorderSizePixel = 0
+                f.ZIndex = 999999
+                state.blackScreenGui = sg
+            else
+                if state.blackScreenGui then
+                    pcall(function() state.blackScreenGui:Destroy() end)
+                    state.blackScreenGui = nil
+                end
+            end
+        end
+    })
+
+    -- Done - we will now start the update loop below
+end
+
+-- ====== CORE UPDATE LOOP ======
+function updateAllESP(delta)
+    -- iterate items in workspace.items (if exists)
+    local itemsFolder = workspace:FindFirstChild("items")
+    if itemsFolder then
+        for _, item in ipairs(itemsFolder:GetChildren()) do
+            if not item then continue end
+            -- decide category
+            local cat = getCategoryOfItem(item)
+            local isChest = (item.Name:lower():find("chest") or item.Name:lower():find("box"))
+            local isChild = false
+            if workspace:FindFirstChild("characters") then
+                -- you said all characters in workspace.characters; if item is inside that, mark child
+                if item:IsDescendantOf(workspace.characters) then isChild = true end
+            end
+
+            -- should we show name?
+            local nameEnabled = false
+            local highlightEnabled = false
+
+            if isChest and state.espName.chests then
+                nameEnabled = state.espName.chests
+                highlightEnabled = state.espHighlight.chests
+            elseif isChild and state.espName.children then
+                nameEnabled = state.espName.children
+                highlightEnabled = state.espHighlight.children
+            elseif cat then
+                nameEnabled = state.espName[cat] and isMatch(item.Name, state.selections[cat])
+                highlightEnabled = state.espHighlight[cat] and isMatch(item.Name, state.selections[cat])
+            end
+
+            -- create or remove billboard/highlight depending on toggles
+            if nameEnabled then
+                createBillboardFor(item)
+            else
+                removeBillboardFor(item)
+            end
+
+            if highlightEnabled then
+                createHighlightFor(item)
+            else
+                removeHighlightFor(item)
+            end
+
+            -- update label text and distance
+            if state.espObjects[item] and state.espObjects[item].label then
+                local prim = getPrimaryPart(item)
+                local distText = ""
+                if prim and LocalPlayer and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local hrp = LocalPlayer.Character.HumanoidRootPart
+                    local dist = (hrp.Position - prim.Position).Magnitude
+                    distText = string.format(" | %dm", math.floor(dist))
+                else
+                    distText = ""
+                end
+                local labeltext = safeNameOf(item) .. distText
+                pcall(function() state.espObjects[item].label.Text = labeltext end)
+            end
+        end
+    end
+
+    -- cleanup ESP for items removed from workspace
+    for inst,_ in pairs(state.espObjects) do
+        if inst == "__ScreenGui" then continue end
+        if typeof(inst) == "Instance" and inst.Parent == nil then
+            destroyESPFor(inst)
+        end
+    end
+
+    -- Optionally: handle workspace.characters objects for child ESP if they are not in items
+    local charFolder = workspace:FindFirstChild("characters")
+    if charFolder then
+        for _, c in ipairs(charFolder:GetChildren()) do
+            if not c then continue end
+            local isChild = true
+            if state.espName.children then
+                createBillboardFor(c)
+            else
+                removeBillboardFor(c)
+            end
+            if state.espHighlight.children then
+                createHighlightFor(c)
+            else
+                removeHighlightFor(c)
+            end
+            if state.espObjects[c] and state.espObjects[c].label then
+                local prim = getPrimaryPart(c)
+                local distText = ""
+                if prim and LocalPlayer and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local hrp = LocalPlayer.Character.HumanoidRootPart
+                    local dist = (hrp.Position - prim.Position).Magnitude
+                    distText = string.format(" | %dm", math.floor(dist))
+                else
+                    distText = ""
+                end
+                pcall(function() state.espObjects[c].label.Text = safeNameOf(c) .. distText end)
+            end
+        end
+    end
+end
+
+-- loop handle
+lastTick = 0
+RunService:BindToRenderStep("ESP_Update", Enum.RenderPriority.Camera.Value + 1, function()
+    if not state.running then return end
+    local ok, err = pcall(function()
+        updateAllESP()
+    end)
+    if not ok then
+        -- prevent spam; optionally print for debugging
+        -- warn("ESP update error:", err)
+    end
+end)
+
+-- ====== PUBLIC API to call from your UI loader ======
+return {
+    CreateVisuals = CreateVisuals,
+    -- small helpers if you need to toggle ESP off and clean:
+    DisableAll = function()
+        state.running = false
+        for inst,_ in pairs(state.espObjects) do
+            if inst == "__ScreenGui" then
+                pcall(function() state.espObjects.__ScreenGui:Destroy() end)
+            else
+                destroyESPFor(inst)
+            end
+        end
+        state.espObjects = {}
+        if state.blackScreenGui then pcall(function() state.blackScreenGui:Destroy() end) end
+        -- restore lighting if saved
+        if state.savedLighting._saved then
+            Lighting.Ambient = state.savedLighting.Ambient
+            Lighting.Brightness = state.savedLighting.Brightness
+            Lighting.FogEnd = state.savedLighting.FogEnd
+            Lighting.FogStart = state.savedLighting.FogStart
+            Lighting.GlobalShadows = state.savedLighting.GlobalShadows
+        end
+    end
+}
