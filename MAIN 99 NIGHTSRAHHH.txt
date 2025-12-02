@@ -1,0 +1,5666 @@
+local a, b =
+    pcall(
+    function()
+        return loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+    end
+)
+if not a or not b then
+    warn("❌ Failed to load WindUI")
+    return
+end
+themeNames = {
+    "Ocean Blue",
+    "Forest Green",
+    "Minimal Light",
+    "Retro Purple",
+    "Sunset",
+    "Neon Pulse",
+    "Steel Phantom",
+    "Vaporwave",
+    "Deep Sea",
+    "Sepia Warmth",
+    "Monokai Dark",
+    "Solarized Light",
+    "Cherry Blossom",
+    "Charcoal Gold",
+    "Icy Mint",
+    "Volcano",
+    "Amethyst",
+    "Pastel Dream",
+    "Coffee Shop",
+    "Cyberpunk Red"
+}
+themeColors = {
+    ["Ocean Blue"] = {
+        Accent = "#0B5394",
+        Dialog = "#0A3D6B",
+        Outline = "#6DACEA",
+        Text = "#EBF5FF",
+        Placeholder = "#85AECF",
+        Background = "#051A2E",
+        Button = "#1C67A8",
+        Icon = "#A9D5FD"
+    },
+    ["Forest Green"] = {
+        Accent = "#1A5E2E",
+        Dialog = "#114220",
+        Outline = "#8AC79B",
+        Text = "#E9FCE9",
+        Placeholder = "#79A378",
+        Background = "#0A2B14",
+        Button = "#2B7A42",
+        Icon = "#B3E3C1"
+    },
+    ["Minimal Light"] = {
+        Accent = "#F3F4F6",
+        Dialog = "#FFFFFF",
+        Outline = "#4B5563",
+        Text = "#1F2937",
+        Placeholder = "#9CA3AF",
+        Background = "#F9FAFB",
+        Button = "#E5E7EB",
+        Icon = "#4B5563"
+    },
+    ["Retro Purple"] = {
+        Accent = "#7E22CE",
+        Dialog = "#4A148C",
+        Outline = "#F0ABFC",
+        Text = "#FDF4FF",
+        Placeholder = "#BC8FDD",
+        Background = "#2D0557",
+        Button = "#9333EA",
+        Icon = "#F0ABFC"
+    },
+    ["Sunset"] = {
+        Accent = "#FF8847",
+        Dialog = "#CC5500",
+        Outline = "#FFD9C0",
+        Text = "#FFF7F0",
+        Placeholder = "#FFC099",
+        Background = "#331A00",
+        Button = "#FF7043",
+        Icon = "#FFD9C0"
+    },
+    ["Neon Pulse"] = {
+        Accent = "#00FF00",
+        Dialog = "#111111",
+        Outline = "#00FFFF",
+        Text = "#FFFFFF",
+        Placeholder = "#008800",
+        Background = "#000000",
+        Button = "#39FF14",
+        Icon = "#00FFFF"
+    },
+    ["Steel Phantom"] = {
+        Accent = "#404040",
+        Dialog = "#262626",
+        Outline = "#A3A3A3",
+        Text = "#D4D4D4",
+        Placeholder = "#737373",
+        Background = "#171717",
+        Button = "#525252",
+        Icon = "#A3A3A3"
+    },
+    ["Vaporwave"] = {
+        Accent = "#FF00FF",
+        Dialog = "#1B001B",
+        Outline = "#00FFFF",
+        Text = "#FFFFFF",
+        Placeholder = "#FF69FF",
+        Background = "#0A0014",
+        Button = "#E75480",
+        Icon = "#00FFFF"
+    },
+    ["Deep Sea"] = {
+        Accent = "#008B8B",
+        Dialog = "#005A5A",
+        Outline = "#80CBC4",
+        Text = "#E0FFFF",
+        Placeholder = "#4DB6AC",
+        Background = "#003636",
+        Button = "#00A3A3",
+        Icon = "#80CBC4"
+    },
+    ["Sepia Warmth"] = {
+        Accent = "#7B3F00",
+        Dialog = "#5C3200",
+        Outline = "#D2B48C",
+        Text = "#F5E8D6",
+        Placeholder = "#A98F70",
+        Background = "#3D291F",
+        Button = "#9D5B18",
+        Icon = "#D2B48C"
+    },
+    ["Monokai Dark"] = {
+        Accent = "#F92672",
+        Dialog = "#272822",
+        Outline = "#66D9EF",
+        Text = "#F8F8F2",
+        Placeholder = "#75715E",
+        Background = "#1C1E1A",
+        Button = "#A6E22E",
+        Icon = "#66D9EF"
+    },
+    ["Solarized Light"] = {
+        Accent = "#268BD2",
+        Dialog = "#FDF6E3",
+        Outline = "#93A1A1",
+        Text = "#586E75",
+        Placeholder = "#839496",
+        Background = "#EEE8D5",
+        Button = "#B58900",
+        Icon = "#268BD2"
+    },
+    ["Cherry Blossom"] = {
+        Accent = "#F9BCCB",
+        Dialog = "#FFFAFD",
+        Outline = "#D96985",
+        Text = "#4A1429",
+        Placeholder = "#C397A3",
+        Background = "#FFF7F9",
+        Button = "#E68A9F",
+        Icon = "#D96985"
+    },
+    ["Charcoal Gold"] = {
+        Accent = "#FFD700",
+        Dialog = "#2C2C2C",
+        Outline = "#C0C0C0",
+        Text = "#F5F5F5",
+        Placeholder = "#6E6E6E",
+        Background = "#1D1D1D",
+        Button = "#B8860B",
+        Icon = "#FFD700"
+    },
+    ["Icy Mint"] = {
+        Accent = "#40E0D0",
+        Dialog = "#F0FFFF",
+        Outline = "#81D4FA",
+        Text = "#004D40",
+        Placeholder = "#B2DFDB",
+        Background = "#E0FFFF",
+        Button = "#80CBC4",
+        Icon = "#40E0D0"
+    },
+    ["Volcano"] = {
+        Accent = "#B22222",
+        Dialog = "#1C1C1C",
+        Outline = "#FF6347",
+        Text = "#EBEBEB",
+        Placeholder = "#704747",
+        Background = "#0A0A0A",
+        Button = "#FF4500",
+        Icon = "#FF6347"
+    },
+    ["Amethyst"] = {
+        Accent = "#9966CC",
+        Dialog = "#36284C",
+        Outline = "#CCFF66",
+        Text = "#EDE9F2",
+        Placeholder = "#8A72A4",
+        Background = "#221A33",
+        Button = "#7A52AA",
+        Icon = "#CCFF66"
+    },
+    ["Pastel Dream"] = {
+        Accent = "#FFB3BA",
+        Dialog = "#FAF3E0",
+        Outline = "#BAE1FF",
+        Text = "#333333",
+        Placeholder = "#C1B4A5",
+        Background = "#FFFFFF",
+        Button = "#BAE1FF",
+        Icon = "#FFB3BA"
+    },
+    ["Coffee Shop"] = {
+        Accent = "#795548",
+        Dialog = "#F5F5DC",
+        Outline = "#A1887F",
+        Text = "#3E2723",
+        Placeholder = "#BCB0A4",
+        Background = "#FFF8E1",
+        Button = "#D7CCC8",
+        Icon = "#795548"
+    },
+    ["Cyberpunk Red"] = {
+        Accent = "#FF3333",
+        Dialog = "#080008",
+        Outline = "#33FFFF",
+        Text = "#FDFDFD",
+        Placeholder = "#771111",
+        Background = "#000000",
+        Button = "#CC0000",
+        Icon = "#33FFFF"
+    }
+}
+for c, d in pairs(themeColors) do
+    b:AddTheme(
+        {
+            Name = c,
+            Accent = Color3.fromHex(d.Accent),
+            Dialog = Color3.fromHex(d.Dialog),
+            Outline = Color3.fromHex(d.Outline),
+            Text = Color3.fromHex(d.Text),
+            Placeholder = Color3.fromHex(d.Placeholder),
+            Background = Color3.fromHex(d.Background),
+            Button = Color3.fromHex(d.Button),
+            Icon = Color3.fromHex(d.Icon)
+        }
+    )
+end
+b:SetTheme("Volcano")
+local function e(f, g, i)
+    local j = ""
+    for k = 1, #f do
+        local l = (k - 1) / (#f - 1)
+        local n = g.R + (i.R - g.R) * l
+        local o = g.G + (i.G - g.G) * l
+        local p = g.B + (i.B - g.B) * l
+        local q = string.format("#%02X%02X%02X", n * 255, o * 255, p * 255)
+        j = j .. string.format('<font color="%s">%s</font>', q, f:sub(k, k))
+    end
+    return j
+end
+local r =
+    b:CreateWindow(
+    {
+        Title = "RyZen Hub",
+        Icon = "rbxassetid://84501312005643",
+        IconThemed = true,
+        Author = "By @mallo",
+        Size = UDim2.fromOffset(580, 460),
+        Resizable = true,
+        Transparent = true,
+        User = {Enabled = true, Anonymous = False, Callback = function()
+                print("clicked")
+            end}
+    }
+)
+r:Tag({Title = "99 nights", Color = Color3.fromHex("#30ff6a"), Radius = 10})
+r:Tag({Title = "v1.0-Beta", Color = Color3.fromHex("#30ff6a"), Radius = 10})
+r:SetIconSize(50)
+r:EditOpenButton(
+    {
+        Title = "RyZen Hub",
+        Icon = "rbxassetid://84501312005643",
+        CornerRadius = UDim.new(0, 16),
+        StrokeThickness = 2,
+        Color = ColorSequence.new(Color3.fromHex("ADD8E6"), Color3.fromHex("00008B")),
+        OnlyMobile = false,
+        Enabled = true,
+        Draggable = true
+    }
+)
+r:DisableTopbarButtons({"Close"})
+local t = r:Tab({Title = "Information", Icon = "info"})
+local u = "KG9ADqwT9Q"
+local v = "https://discord.com/api/v10/invites/" .. u .. "?with_counts=true&with_expiration=true"
+local w
+local x = nil
+xpcall(
+    function()
+        w =
+            game:GetService("HttpService"):JSONDecode(
+            b.Creator.Request({Url = v, Method = "GET", Headers = {["Accept"] = "application/json"}}).Body
+        )
+    end,
+    function(err)
+        warn("err fetching discord info: " .. tostring(err))
+        x = tostring(err)
+        w = nil
+    end
+)
+if w and w.guild then
+    local y = {
+        Title = w.guild.name,
+        Desc = ' <font color="#52525b">•</font> Member Count: ' ..
+            tostring(w.approximate_member_count) ..
+                '\n <font color="#16a34a">•</font> Online Count: ' .. tostring(w.approximate_presence_count),
+        Image = "https://cdn.discordapp.com/icons/" .. w.guild.id .. "/" .. w.guild.icon .. ".png?size=256",
+        ImageSize = 42,
+        Buttons = {
+            {
+                Icon = "link",
+                Title = "Copy Discord Invite",
+                Callback = function()
+                    pcall(
+                        function()
+                            setclipboard("https://discord.gg/" .. u)
+                        end
+                    )
+                end
+            },
+            {
+                Icon = "refresh-cw",
+                Title = "Update Info",
+                Callback = function()
+                    xpcall(
+                        function()
+                            local z =
+                                game:GetService("HttpService"):JSONDecode(
+                                b.Creator.Request({Url = v, Method = "GET"}).Body
+                            )
+                            if z and z.guild then
+                                DiscordInfo:SetDesc(
+                                    ' <font color="#52525b">•</font> Member Count: ' ..
+                                        tostring(z.approximate_member_count) ..
+                                            '\n <font color="#16a34a">•</font> Online Count: ' ..
+                                                tostring(z.approximate_presence_count)
+                                )
+                            end
+                        end,
+                        function(err)
+                            warn("err updating discord info: " .. tostring(err))
+                        end
+                    )
+                end
+            }
+        }
+    }
+    if w.guild.banner then
+        y.Thumbnail = "https://cdn.discordapp.com/banners/" .. w.guild.id .. "/" .. w.guild.banner .. ".png?size=256"
+        y.ThumbnailSize = 80
+    end
+    local DiscordInfo = t:Paragraph(y)
+else
+    t:Paragraph(
+        {
+            Title = "Error when receiving information about the Discord server",
+            Desc = x or "Unknown error occurred",
+            Image = "triangle-alert",
+            ImageSize = 26,
+            Color = "Red"
+        }
+    )
+end
+local A =
+    t:Paragraph(
+    {
+        Title = e("PanScript", Color3.fromRGB(173, 216, 230), Color3.fromRGB(0, 0, 139)),
+        Desc = "Script made by @mallo",
+        Color = "White"
+    }
+)
+local B =
+    t:Paragraph(
+    {
+        Title = "Version Beta!",
+        Desc = "More features Coming Soon! If you encounted some bugs join our discord to report it!",
+        Color = "White"
+    }
+)
+
+VulnTab = Window:Tab({
+    Title = "Vulnerability",
+    Icon = "file-exclamation-point"
+})
+
+VulnTab:Divider()
+
+Paragraph = VulnTab:Paragraph({
+    Title = GradientText("Disclaimer", Color3.fromRGB(255, 0, 0), Color3.fromRGB(255, 255, 255)),
+    Desc = "This vuln is a beta, it might not work!\n\nstep 1\nget some saplings. you don't have to drag them, just be near them\n\nstep 2\nclick the inf sapling button\n\nstep 3\ninf saplings! :)",
+    Locked = false,
+})
+
+VulnTab:Divider()
+
+-- 🌱 Variables
+FollowPlayer = false
+SaplingAmount = 1
+plantingDelay = 0.01 -- seconds between each sapling (updated by slider)
+RS = game:GetService("ReplicatedStorage")
+RemoteStartDrag = RS.RemoteEvents:FindFirstChild("RequestStartDraggingItem")
+PlantRemote = RS.RemoteEvents:FindFirstChild("RequestPlantItem")
+
+plantingTaskRunning = false
+
+-- robust sapling finder
+function findSapling()
+    if workspace.Items then
+        s = workspace.Items:FindFirstChild("Sapling")
+        if s then return s end
+        for _, child in ipairs(workspace.Items:GetChildren()) do
+            if tostring(child.Name):lower():find("sapling") then return child end
+        end
+    end
+    return nil
+end
+
+-- ground raycast under origin (start a bit above so we don't hit the player)
+function getGroundPositionBelow(origin, ignoreList)
+    rayOrigin = origin + Vector3.new(0, 3, 0)
+    rayDir = Vector3.new(0, -300, 0)
+    params = RaycastParams.new()
+    params.FilterDescendantsInstances = ignoreList or {}
+    params.FilterType = Enum.RaycastFilterType.Blacklist
+    res = workspace:Raycast(rayOrigin, rayDir, params)
+    if res and res.Position then
+        return res.Position + Vector3.new(0, 0.06, 0) -- small offset, tweak if needed
+    end
+    return nil
+end
+
+-- defensive plant: try Vector3, then CFrame
+function tryPlant(remote, sapling, pos)
+    if not remote then return end
+    pcall(function() remote:InvokeServer(sapling, pos) end)
+    pcall(function() remote:InvokeServer(sapling, CFrame.new(pos)) end)
+end
+
+-- start single-safe planting loop
+function startPlantingLoop()
+    if plantingTaskRunning then return end
+    plantingTaskRunning = true
+
+    task.spawn(function()
+        player = game.Players.LocalPlayer
+        while plantingTaskRunning do
+            if FollowPlayer then
+                char = player and player.Character
+                hrp = char and char:FindFirstChild("HumanoidRootPart")
+                sapling = findSapling()
+                if hrp and sapling then
+                    -- plant SaplingAmount, but recalc position for each sapling so it follows movement
+                    for i = 1, SaplingAmount do
+                        if not FollowPlayer then break end
+
+                        -- ensure server thinks we're dragging the sapling (do it each time)
+                        pcall(function()
+                            if RemoteStartDrag then RemoteStartDrag:FireServer(sapling) end
+                        end)
+
+                        -- recompute ground under current HRP so planting follows the player
+                        ground = getGroundPositionBelow(hrp.Position, {char})
+                        plantPos = ground or (hrp.Position + Vector3.new(0, -3, 0))
+
+                        tryPlant(PlantRemote, sapling, plantPos)
+
+                        task.wait(plantingDelay)
+                    end
+                else
+                    -- no hrp or sapling, retry quickly
+                    task.wait(0.12)
+                end
+            else
+                -- not following, sleep and let toggle handle re-start
+                task.wait(0.12)
+            end
+        end
+
+        plantingTaskRunning = false
+    end)
+end
+
+-- UI: Saplings slider (no notify)
+SaplingSlider = VulnTab:Slider({
+    Title = "Saplings to Plant",
+    Desc = "Select how many saplings to plant",
+    Step = 1,
+    Value = { Min = 1, Max = 500, Default = 50 },
+    Callback = function(value) SaplingAmount = value end
+})
+
+-- UI: Speed slider
+SpeedSlider = VulnTab:Slider({
+    Title = "Planting Speed (seconds)",
+    Desc = "0.01 = fastest, 1 = slowest",
+    Step = 0.01,
+    Value = { Min = 0.01, Max = 1, Default = 0.1 },
+    Callback = function(value) plantingDelay = value end
+})
+
+-- Follow toggle (starts/stops loop; no Stop button anymore)
+VulnTab:Toggle({
+    Title = "Dupe Saplings!",
+    Content = "Saplings will plant at your current position",
+    Value = false,
+    Callback = function(state)
+        FollowPlayer = state
+        if FollowPlayer then
+            if not plantingTaskRunning then startPlantingLoop() end
+            WindUI:Notify({
+                Title = "Follow Mode ON",
+                Content = "Saplings will now follow you!",
+                Duration = 2.5,
+                Icon = "user-follow",
+            })
+        else
+            -- stop following: flip flags so the loop exits cleanly
+            plantingTaskRunning = false
+            WindUI:Notify({
+                Title = "Follow Mode OFF",
+                Content = "Saplings will stop following.",
+                Duration = 2.5,
+                Icon = "user-unfollow",
+            })
+        end
+    end
+})
+
+r:Divider()
+local C = r:Tab({Title = "Main", Icon = "house"})
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+remoteFolder = ReplicatedStorage:WaitForChild("RemoteEvents", 10)
+if not remoteFolder then
+    warn("❌ RemoteEvents folder not found in ReplicatedStorage.")
+    return
+end
+DamageEvent = remoteFolder:WaitForChild("DamagePlayer", 10)
+if not DamageEvent then
+    warn("❌ DamagePlayer event not found in RemoteEvents.")
+    return
+end
+C:Button(
+    {
+        Title = "God Mode",
+        Desc = "Become unkillable instantly",
+        Callback = function()
+            DamageEvent:FireServer(-math.huge)
+            b:Notify(
+                {
+                    Title = "God Mode",
+                    Content = "You're now invincible!",
+                    Duration = 3,
+                    Icon = "rbxassetid://84501312005643"
+                }
+            )
+        end
+    }
+)
+C:Section({Icon = "shield", Title = "Kill Aura"})
+if type(_G.Settings) ~= "table" then
+    _G.Settings = {}
+end
+if type(_G.Settings.Main) ~= "table" then
+    _G.Settings.Main = {}
+end
+_G.Settings.Main["Kill Aura"] = _G.Settings.Main["Kill Aura"] or false
+_G.Settings.Main["Kill Aura Targets"] = _G.Settings.Main["Kill Aura Targets"] or {"All"}
+_G.Settings.Main["Kill Aura Range"] = _G.Settings.Main["Kill Aura Range"] or 100
+killAuraTargets = {
+    "All",
+    "Polar Bear",
+    "Arctic Fox",
+    "Mammoth",
+    "Cultist",
+    "Crossbow Cultist",
+    "Cultist King",
+    "Scorpion",
+    "Wolf",
+    "Alpha Wolf",
+    "Bear",
+    "Bunny",
+    "Frog",
+    "Hellephant",
+    "Meteor Crab",
+    "Juggernaut King",
+    "Alien"
+}
+C:Dropdown(
+    {
+        Flag = "KillAura",
+        Title = "Kill Aura Targets",
+        Description = "Select enemies to Target",
+        Values = killAuraTargets,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = true,
+        Callback = function(D)
+            _G.Settings.Main["Kill Aura Targets"] = D
+        end
+    }
+)
+Players = game:GetService("Players")
+Workspace = game:GetService("Workspace")
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+player = Players.LocalPlayer
+client_ok, Client =
+    pcall(
+    function()
+        return require(player:WaitForChild("PlayerScripts"):WaitForChild("Client"))
+    end
+)
+toolsDamageIDs = {
+    ["Old Axe"] = "_1",
+    ["Good Axe"] = "_1",
+    ["Strong Axe"] = "_1",
+    ["Chainsaw"] = "_1",
+    ["Laser Sword"] = "_1"
+}
+function getToolAndDamageID()
+    inv = player:FindFirstChild("Inventory")
+    if not inv then
+        return nil, nil
+    end
+    for E, suffix in pairs(toolsDamageIDs) do
+        local tool = inv:FindFirstChild(E)
+        if tool then
+            return tool, suffix
+        end
+    end
+    return nil, nil
+end
+function findHRP(F)
+    if not F then
+        return nil
+    end
+    return F:FindFirstChild("HumanoidRootPart") or F:FindFirstChild("UpperTorso")
+end
+function invokeToolDamage(G, H, damageID, I)
+    if client_ok and Client and Client.Events and Client.Events.ToolDamageObject then
+        local ok, res =
+            pcall(
+            function()
+                return Client.Events.ToolDamageObject:InvokeServer(G, H, damageID, I)
+            end
+        )
+        if ok then
+            return res
+        end
+    end
+    fallback =
+        ReplicatedStorage:FindFirstChild("RemoteEvents") and
+        ReplicatedStorage.RemoteEvents:FindFirstChild("ToolDamageObject")
+    if fallback and fallback:IsA("RemoteFunction") then
+        ok, res =
+            pcall(
+            function()
+                return fallback:InvokeServer(G, H, damageID, I)
+            end
+        )
+        if ok then
+            return res
+        end
+    end
+    return nil
+end
+hitCounter = 1
+spawn(
+    function()
+        while true do
+            wait(0.18)
+            if _G.Settings.Main["Kill Aura"] and player and player.Character then
+                char = player.Character
+                hrp = findHRP(char)
+                tool, suffix = getToolAndDamageID()
+                if hrp and tool and suffix then
+                    targets = _G.Settings.Main["Kill Aura Targets"] or {"All"}
+                    attackAll = false
+                    for k, l in pairs(targets) do
+                        if l == "All" then
+                            attackAll = true
+                        end
+                    end
+                    auraRange = tonumber(_G.Settings.Main["Kill Aura Range"]) or 100
+                    charactersFolder = Workspace:FindFirstChild("Characters") or Workspace
+                    children = charactersFolder:GetChildren()
+                    for k = 1, #children do
+                        enemy = children[k]
+                        if enemy:IsA("Model") and enemy ~= char then
+                            enemyHRP = findHRP(enemy)
+                            if enemyHRP and enemy.Parent then
+                                shouldAttack = attackAll
+                                if not attackAll then
+                                    for J, l in pairs(targets) do
+                                        if string.lower(l) == string.lower(enemy.Name) then
+                                            shouldAttack = true
+                                            break
+                                        end
+                                    end
+                                end
+                                if shouldAttack then
+                                    distance = (enemyHRP.Position - hrp.Position).Magnitude
+                                    if distance <= auraRange then
+                                        for K = 1, 10 do
+                                            if not _G.Settings.Main["Kill Aura"] or not enemy or not enemy.Parent then
+                                                break
+                                            end
+                                            damageID = tostring(hitCounter) .. suffix
+                                            ok, err =
+                                                pcall(
+                                                function()
+                                                    invokeToolDamage(enemy, tool, damageID, hrp.CFrame)
+                                                end
+                                            )
+                                            if not ok then
+                                                warn("Kill Aura hit failed:", err)
+                                            end
+                                            hitCounter = hitCounter + 1
+                                            wait(0.01)
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
+local L = false
+local M = 36
+local N = {}
+local O = workspace:FindFirstChild("KillAuraRange")
+if not O then
+    O = Instance.new("Folder")
+    O.Name = "KillAuraRange"
+    O.Parent = workspace
+end
+for k = 1, M do
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(0.2, 0.2, 4)
+    part.Anchored = true
+    part.CanCollide = false
+    part.CastShadow = false
+    part.Material = Enum.Material.Neon
+    part.Color = Color3.fromRGB(255, 0, 0)
+    part.Parent = O
+    table.insert(N, part)
+end
+local function P(pos, Q)
+    for k = 1, #N do
+        local part = N[k]
+        local R = k / #N * math.pi * 2
+        local S = math.cos(R) * Q
+        local T = math.sin(R) * Q
+        part.CFrame = CFrame.new(pos + Vector3.new(S, 0.5, T)) * CFrame.Angles(0, -R, 0)
+    end
+end
+spawn(
+    function()
+        while true do
+            wait(0.1)
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                if L then
+                    P(char.HumanoidRootPart.Position, _G.Settings.Main["Kill Aura Range"])
+                else
+                    for k = 1, #N do
+                        N[k].Position = Vector3.new(0, -9999, 0)
+                    end
+                end
+            end
+        end
+    end
+)
+C:Toggle(
+    {Flag = "KillAura", Title = "Kill Aura", Desc = "Kill Enemies easily", Callback = function(U)
+            _G.Settings.Main["Kill Aura"] = U
+        end}
+)
+C:Slider(
+    {
+        Flag = "KillAura",
+        Title = "Kill Aura Range",
+        Desc = "Adjust the range for Kill Aura",
+        Step = 1,
+        Value = {Min = 5, Max = 50, Default = _G.Settings.Main["Kill Aura Range"]},
+        Callback = function(V)
+            _G.Settings.Main["Kill Aura Range"] = tonumber(V)
+        end
+    }
+)
+C:Toggle(
+    {
+        Flag = "KillAura",
+        Title = "Show Kill Aura Range",
+        Desc = "Display red circle for Kill Aura",
+        Default = false,
+        Callback = function(U)
+            L = U
+        end
+    }
+)
+C:Section({Icon = "cog", Title = "Auto Tame"})
+Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local player = Players.LocalPlayer
+local function W()
+    local gui = player:WaitForChild("PlayerGui"):WaitForChild("Interface"):WaitForChild("TamingFluteFrame")
+    local X = gui:WaitForChild("TimingBar")
+    local Y = X:WaitForChild("SuccessArea")
+    Y.Size = UDim2.new(3, 1, 10.3, 10)
+    Y.Position = UDim2.new(0.5, 0, 0.5, 0)
+    X.Size = Y.Size
+    X.Position = Y.Position
+end
+local Z =
+    C:Toggle(
+    {
+        Flag = "AutoTame",
+        Title = "Auto Tame",
+        Desc = "Automatically completes taming minigame",
+        Icon = "target",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            _G.AutoTameEnabled = U
+            if U then
+                local gui = player:WaitForChild("PlayerGui"):WaitForChild("Interface"):WaitForChild("TamingFluteFrame")
+                gui:GetPropertyChangedSignal("Visible"):Connect(
+                    function()
+                        if _G.AutoTameEnabled and gui.Visible then
+                            W()
+                        end
+                    end
+                )
+            end
+        end
+    }
+)
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+local function _()
+    return player:FindFirstChild("Inventory") and player.Inventory:FindFirstChild("Old Taming Flute")
+end
+local function a0()
+    local a1 = workspace:FindFirstChild("Items") and workspace.Items:FindFirstChild("Old Taming Flute")
+    if not a1 then
+        for a2, a3 in ipairs(workspace.Items:GetChildren()) do
+            if a3:FindFirstChild("Main") then
+                a1 = a3.Main
+                break
+            end
+        end
+    end
+    return a1
+end
+local function a4()
+    local a5 = _()
+    if not a5 then
+        local a1 = a0()
+        if a1 then
+            pcall(
+                function()
+                    ReplicatedStorage.RemoteEvents.RequestHotbarItem:InvokeServer(a1)
+                end
+            )
+        else
+            pcall(
+                function()
+                    b:Notify(
+                        {Title = "Grab Flute", Content = "No Old Taming Flute detected!", Duration = 3, Icon = "bird"}
+                    )
+                end
+            )
+        end
+    else
+        pcall(
+            function()
+                b:Notify(
+                    {
+                        Title = "Grab Flute",
+                        Content = "You already have the flute!",
+                        Duration = 2,
+                        Icon = "rbxassetid://84501312005643"
+                    }
+                )
+            end
+        )
+    end
+end
+C:Button({Title = "Grab Flute Now", Callback = a4})
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+local a6 = ReplicatedStorage:WaitForChild("RemoteEvents"):WaitForChild("RequestConsumeItem")
+local a7 = false
+local a8 = 50
+local a9 = false
+C:Section({Icon = "shield", Title = "Auto Heal"})
+C:Toggle(
+    {Flag = "Auto heal", Title = "Auto Heal (bandage)", Default = false, Callback = function(U)
+            a7 = U
+        end}
+)
+local aa =
+    C:Slider(
+    {
+        Flag = "Auto heal",
+        Title = "Heal When Below",
+        Desc = "Auto heal when HP drops below this value",
+        Step = 1,
+        Value = {Min = 20, Max = 100, Default = 70},
+        Callback = function(V)
+            print("Slider value:", V)
+        end
+    }
+)
+task.spawn(
+    function()
+        while task.wait(0.5) do
+            if a7 and not a9 then
+                local char = player.Character
+                local humanoid = char and char:FindFirstChildOfClass("Humanoid")
+                if humanoid and humanoid.Health > 0 and humanoid.Health <= a8 then
+                    local inv = player:FindFirstChild("Inventory")
+                    local ab = inv and inv:FindFirstChild("Bandage")
+                    if ab then
+                        a6:InvokeServer(ab)
+                        b:Notify(
+                            {
+                                Title = "Auto Heal",
+                                Content = "Used Bandage at " .. math.floor(humanoid.Health) .. " HP!",
+                                Duration = 3,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                        a9 = true
+                        task.wait(5)
+                        a9 = false
+                    else
+                        b:Notify(
+                            {
+                                Title = "Auto Heal",
+                                Content = "No Bandage found in inventory!",
+                                Duration = 3,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                        task.wait(3)
+                    end
+                end
+            end
+        end
+    end
+)
+local ac = r:Tab({Title = "Bring Items", Icon = "package"})
+local ad = ac:Section({Title = "Settings", Icon = "cog"})
+local ae = "You"
+ac:Dropdown(
+    {
+        Flag = "BringItems",
+        Title = "Select Target",
+        Values = {"You", "Campfire", "Workbench"},
+        Value = ae,
+        Callback = function(af)
+            ae = af
+            print(" Bring target set to:", ae)
+        end
+    }
+)
+local ag = 10
+local ah =
+    ac:Input(
+    {
+        Flag = "BringItems",
+        Title = "Max Per Item",
+        Desc = "Enter how many of each item to bring",
+        Value = tostring(ag),
+        InputIcon = "bird",
+        Type = "Input",
+        Placeholder = "Enter number...",
+        Callback = function(ai)
+            local aj = tonumber(ai)
+            if aj and aj > 0 then
+                ag = aj
+                print("🎚️ MaxPerItem set to:", ag)
+            else
+                warn("⚠️ Invalid number entered")
+            end
+        end
+    }
+)
+local ak = {}
+local al = {
+    "All",
+    "Bolt",
+    "Tyre",
+    "Sheet Metal",
+    "Old Radio",
+    "Broken Fan",
+    "Broken Microwave",
+    "Washing Machine",
+    "Old Car Engine",
+    "UFO Scrap",
+    "UFO Component",
+    "UFO Junk",
+    "Cultist Gem",
+    "Gem of the Forest"
+}
+local am = false
+local function an()
+    if ae == "You" then
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            return char.HumanoidRootPart.CFrame
+        end
+    elseif ae == "Workbench" then
+        return CFrame.new(20.9532776, 3.18912888, -5.23712301, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+    elseif ae == "Campfire" then
+        return CFrame.new(
+            4.95910645e-05,
+            1.49994469,
+            -7.62939453e-06,
+            -1.1920929e-07,
+            1.00000012,
+            0,
+            1.00000012,
+            -1.1920929e-07,
+            0,
+            0,
+            0,
+            -1.00000024
+        )
+    end
+end
+local ad = ac:Section({Title = "Gears", Icon = "cog"})
+local ao = "Bolt"
+ac:Dropdown(
+    {Flag = "BringItems", Title = "Select Gear", Values = al, Multi = true, Value = {}, Callback = function(af)
+            if table.find(af, "All") then
+                ak = {}
+                for a2, ap in ipairs(al) do
+                    if ap ~= "All" then
+                        table.insert(ak, ap)
+                    end
+                end
+            else
+                ak = af
+            end
+            print("🎯 Selected Items:", table.concat(ak, ", "))
+        end}
+)
+ac:Button(
+    {
+        Title = "Bring Selected Items",
+        Callback = function()
+            local aq = workspace:FindFirstChild("Items")
+            local player = game.Players.LocalPlayer
+            local ar
+            if ae == "You" then
+                local char = player.Character
+                ar = char and char:FindFirstChild("HumanoidRootPart") and char.HumanoidRootPart.Position
+            elseif ae == "Workbench" then
+                ar = Vector3.new(20.9532776, 3.18912888, -5.23712301)
+            elseif ae == "Campfire" then
+                ar = Vector3.new(4.95910645e-05, 1.49994469, -7.62939453e-06)
+            end
+            if not ar then
+                warn("⚠️ Target not found")
+                return
+            end
+            local as = {}
+            local at = 0
+            for a2, au in ipairs(ak) do
+                local av = 0
+                local aw = ag or 10
+                for a2, ap in ipairs(aq:GetChildren()) do
+                    if ap.Name == au and ap:IsA("Model") then
+                        local ax = ap:FindFirstChildWhichIsA("BasePart")
+                        if ax then
+                            if not ap.PrimaryPart then
+                                ap.PrimaryPart = ax
+                            end
+                            game.ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(ap)
+                            ap:SetPrimaryPartCFrame(CFrame.new(ar + Vector3.new(0, 3, 0)))
+                            game.ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(ap)
+                            av = av + 1
+                            at = at + 1
+                            task.wait(0.05)
+                            if av >= aw then
+                                break
+                            end
+                        end
+                    end
+                end
+                if av == 0 then
+                    table.insert(as, au)
+                else
+                    print("Brought", av, au, "to", ae)
+                end
+            end
+            if b and #as > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Could not find items",
+                                Content = table.concat(as, ", "),
+                                Duration = 5,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+            if b and at > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Items Brought",
+                                Content = "Successfully brought " .. at .. " item(s) to " .. ae,
+                                Duration = 4,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+        end
+    }
+)
+local ad = ac:Section({Title = "Fuel", Icon = "flame"})
+local ay = {"All", "Corpse", "Sapling", "Alien", "Log", "Chair", "Coal", "Fuel Canister", "Oil Barrel", "Biofuel"}
+local az = {}
+ac:Dropdown(
+    {Flag = "BringItems", Title = "Select Fuel", Values = ay, Multi = true, Value = {}, Callback = function(af)
+            if table.find(af, "All") then
+                az = {}
+                for a2, aA in ipairs(ay) do
+                    if aA ~= "All" then
+                        table.insert(az, aA)
+                    end
+                end
+            else
+                az = af
+            end
+            print("🔥 Selected Fuel:", table.concat(az, ", "))
+        end}
+)
+ac:Button(
+    {
+        Title = "Bring Selected Fuel",
+        Callback = function()
+            local aq = workspace:FindFirstChild("Items")
+            local player = game.Players.LocalPlayer
+            local ar
+            if ae == "You" then
+                local char = player.Character
+                ar = char and char:FindFirstChild("HumanoidRootPart") and char.HumanoidRootPart.Position
+            elseif ae == "Workbench" then
+                ar = Vector3.new(20.9532776, 3.18912888, -5.23712301)
+            elseif ae == "Campfire" then
+                ar = Vector3.new(4.95910645e-05, 9.5, -7.62939453e-06)
+            end
+            if not ar then
+                warn("⚠️ Target not found")
+                return
+            end
+            local aB = {}
+            local aC = 0
+            for a2, aD in ipairs(az) do
+                local av = 0
+                local aw = ag or 10
+                for a2, ap in ipairs(aq:GetChildren()) do
+                    if ap.Name == aD and ap:IsA("Model") then
+                        local ax = ap:FindFirstChildWhichIsA("BasePart")
+                        if ax then
+                            if not ap.PrimaryPart then
+                                ap.PrimaryPart = ax
+                            end
+                            game.ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(ap)
+                            ap:SetPrimaryPartCFrame(CFrame.new(ar + Vector3.new(0, 3, 0)))
+                            game.ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(ap)
+                            av = av + 1
+                            aC = aC + 1
+                            task.wait(0.05)
+                            if av >= aw then
+                                break
+                            end
+                        end
+                    end
+                end
+                if av == 0 then
+                    table.insert(aB, aD)
+                else
+                    print("🔥 Brought", av, aD, "to", ae)
+                end
+            end
+            if b and #aB > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Missing Fuel",
+                                Content = table.concat(aB, ", "),
+                                Duration = 5,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+            if b and aC > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Fuel Delivered",
+                                Content = "Successfully brought " .. aC .. " fuel item(s) to " .. ae,
+                                Duration = 4,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+        end
+    }
+)
+local ad = ac:Section({Title = "Food & healing", Icon = "apple"})
+local aE = {}
+local aF = {
+    "All",
+    "Carrot",
+    "Berry",
+    "Morsel",
+    "Steak",
+    "Ribs",
+    "Cooked Morsel",
+    "Cooked Steak",
+    "Cooked Ribs",
+    "Bandage",
+    "Medkit",
+    "Chili"
+}
+local am = false
+local function an()
+    if ae == "You" then
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            return char.HumanoidRootPart.CFrame
+        end
+    elseif ae == "Workbench" then
+        return CFrame.new(20.9532776, 3.18912888, -5.23712301, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+    elseif ae == "Campfire" then
+        return CFrame.new(
+            4.95910645e-05,
+            1.49994469,
+            -7.62939453e-06,
+            -1.1920929e-07,
+            1.00000012,
+            0,
+            1.00000012,
+            -1.1920929e-07,
+            0,
+            0,
+            0,
+            -1.00000024
+        )
+    end
+end
+ac:Dropdown(
+    {
+        Flag = "BringItems",
+        Title = "Select Food & Healing",
+        Values = aF,
+        Multi = true,
+        Value = {},
+        Callback = function(af)
+            if table.find(af, "All") then
+                aE = {}
+                for a2, aG in ipairs(aF) do
+                    if aG ~= "All" then
+                        table.insert(aE, aG)
+                    end
+                end
+            else
+                aE = af
+            end
+            print("🎯 Selected Food:", table.concat(aE, ", "))
+        end
+    }
+)
+ac:Button(
+    {
+        Title = "Bring Selected Food & Healing",
+        Callback = function()
+            local aq = workspace:FindFirstChild("Items")
+            local player = game.Players.LocalPlayer
+            local ar
+            if ae == "You" then
+                local char = player.Character
+                ar = char and char:FindFirstChild("HumanoidRootPart") and char.HumanoidRootPart.Position
+            elseif ae == "Workbench" then
+                ar = Vector3.new(20.9532776, 3.18912888, -5.23712301)
+            elseif ae == "Campfire" then
+                ar = Vector3.new(4.95910645e-05, 1.49994469, -7.62939453e-06)
+            end
+            if not ar then
+                warn("⚠️ Target not found")
+                return
+            end
+            local aH = {}
+            local aI = 0
+            for a2, aJ in ipairs(aE) do
+                local av = 0
+                local aw = ag or 10
+                for a2, ap in ipairs(aq:GetChildren()) do
+                    if ap.Name == aJ and ap:IsA("Model") then
+                        local ax = ap:FindFirstChildWhichIsA("BasePart")
+                        if ax then
+                            if not ap.PrimaryPart then
+                                ap.PrimaryPart = ax
+                            end
+                            game.ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(ap)
+                            ap:SetPrimaryPartCFrame(CFrame.new(ar + Vector3.new(0, 3, 0)))
+                            game.ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(ap)
+                            av = av + 1
+                            aI = aI + 1
+                            task.wait(0.05)
+                            if av >= aw then
+                                break
+                            end
+                        end
+                    end
+                end
+                if av == 0 then
+                    table.insert(aH, aJ)
+                else
+                    print("✅ Brought", av, aJ, "to", ae)
+                end
+            end
+            if b and #aH > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Could not find food",
+                                Content = table.concat(aH, ", "),
+                                Duration = 5,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+            if b and aI > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Food Brought",
+                                Content = "Successfully brought " .. aI .. " item(s) to " .. ae,
+                                Duration = 4,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+        end
+    }
+)
+local ad = ac:Section({Title = "Weapons & ammo", Icon = "swords"})
+local aK = {}
+local aL = {
+    "All",
+    "Morning star",
+    "Laser Sword",
+    "Raygun",
+    "Chainsaw",
+    "Strong Axe",
+    "Spear",
+    "Good Axe",
+    "Revolver",
+    "Rifle",
+    "Tactical Shotgun",
+    "Revolver Ammo",
+    "Rifle Ammo",
+    "Alien Armour",
+    "Leather Body",
+    "Iron Body",
+    "Thorn Body",
+    "Riot Shield"
+}
+local am = false
+local function an()
+    if ae == "You" then
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            return char.HumanoidRootPart.CFrame
+        end
+    elseif ae == "Workbench" then
+        return CFrame.new(20.9532776, 3.18912888, -5.23712301, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+    elseif ae == "Campfire" then
+        return CFrame.new(
+            4.95910645e-05,
+            1.49994469,
+            -7.62939453e-06,
+            -1.1920929e-07,
+            1.00000012,
+            0,
+            1.00000012,
+            -1.1920929e-07,
+            0,
+            0,
+            0,
+            -1.00000024
+        )
+    end
+end
+ac:Dropdown(
+    {Flag = "BringItems", Title = "Select Weapons", Values = aL, Multi = true, Value = {}, Callback = function(af)
+            if table.find(af, "All") then
+                aK = {}
+                for a2, aM in ipairs(aL) do
+                    if aM ~= "All" then
+                        table.insert(aK, aM)
+                    end
+                end
+            else
+                aK = af
+            end
+            print("🎯 Selected Weapons:", table.concat(aK, ", "))
+        end}
+)
+ac:Button(
+    {
+        Title = "Bring Selected Weapons",
+        Callback = function()
+            local aq = workspace:FindFirstChild("Items")
+            local player = game.Players.LocalPlayer
+            local ar
+            if ae == "You" then
+                local char = player.Character
+                ar = char and char:FindFirstChild("HumanoidRootPart") and char.HumanoidRootPart.Position
+            elseif ae == "Workbench" then
+                ar = Vector3.new(20.9532776, 3.18912888, -5.23712301)
+            elseif ae == "Campfire" then
+                ar = Vector3.new(4.95910645e-05, 1.49994469, -7.62939453e-06)
+            end
+            if not ar then
+                warn("⚠️ Target not found")
+                return
+            end
+            local aN = {}
+            local aI = 0
+            for a2, aO in ipairs(aK) do
+                local av = 0
+                local aw = ag or 10
+                for a2, ap in ipairs(aq:GetChildren()) do
+                    if ap.Name == aO and ap:IsA("Model") then
+                        local ax = ap:FindFirstChildWhichIsA("BasePart")
+                        if ax then
+                            if not ap.PrimaryPart then
+                                ap.PrimaryPart = ax
+                            end
+                            game.ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(ap)
+                            ap:SetPrimaryPartCFrame(CFrame.new(ar + Vector3.new(0, 3, 0)))
+                            game.ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(ap)
+                            av = av + 1
+                            aI = aI + 1
+                            task.wait(0.05)
+                            if av >= aw then
+                                break
+                            end
+                        end
+                    end
+                end
+                if av == 0 then
+                    table.insert(aN, aO)
+                else
+                    print("✅ Brought", av, aO, "to", ae)
+                end
+            end
+            if b and #aN > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Could not find weapons",
+                                Content = table.concat(aN, ", "),
+                                Duration = 5,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+            if b and aI > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Weapons Brought",
+                                Content = "Successfully brought " .. aI .. " item(s) to " .. ae,
+                                Duration = 4,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+        end
+    }
+)
+local ad = ac:Section({Title = "Misc", Icon = "package"})
+local aP = {}
+local aQ = {
+    "All",
+    "Sack",
+    "Seed Box",
+    "Chainsaw",
+    "Old Flashlight",
+    "Strong Flastlight",
+    "Bunny Foot",
+    "Wolf Pelt",
+    "Bear Pelt",
+    "Alpha Wolf Pet",
+    "Artic Fox Pelt",
+    "Polar Bear Pelt",
+    "Mammoth Tusk"
+}
+local am = false
+local function an()
+    if ae == "You" then
+        local char = game.Players.LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            return char.HumanoidRootPart.CFrame
+        end
+    elseif ae == "Workbench" then
+        return CFrame.new(20.9532776, 3.18912888, -5.23712301, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+    elseif ae == "Campfire" then
+        return CFrame.new(
+            4.95910645e-05,
+            1.49994469,
+            -7.62939453e-06,
+            -1.1920929e-07,
+            1.00000012,
+            0,
+            1.00000012,
+            -1.1920929e-07,
+            0,
+            0,
+            0,
+            -1.00000024
+        )
+    end
+end
+ac:Dropdown(
+    {Flag = "BringItems", Title = "Select Others", Values = aQ, Multi = true, Value = {}, Callback = function(af)
+            if table.find(af, "All") then
+                aP = {}
+                for a2, ap in ipairs(aQ) do
+                    if ap ~= "All" then
+                        table.insert(aP, ap)
+                    end
+                end
+            else
+                aP = af
+            end
+            print("🎯 Selected Others:", table.concat(aP, ", "))
+        end}
+)
+ac:Button(
+    {
+        Title = "Bring Selected Others",
+        Callback = function()
+            local aq = workspace:FindFirstChild("Items")
+            local player = game.Players.LocalPlayer
+            local ar
+            if ae == "You" then
+                local char = player.Character
+                ar = char and char:FindFirstChild("HumanoidRootPart") and char.HumanoidRootPart.Position
+            elseif ae == "Workbench" then
+                ar = Vector3.new(20.9532776, 3.18912888, -5.23712301)
+            elseif ae == "Campfire" then
+                ar = Vector3.new(4.95910645e-05, 1.49994469, -7.62939453e-06)
+            end
+            if not ar then
+                warn("⚠️ Target not found")
+                return
+            end
+            local as = {}
+            local at = 0
+            for a2, au in ipairs(aP) do
+                local av = 0
+                local aw = ag or 10
+                for a2, ap in ipairs(aq:GetChildren()) do
+                    if ap.Name == au and ap:IsA("Model") then
+                        local ax = ap:FindFirstChildWhichIsA("BasePart")
+                        if ax then
+                            if not ap.PrimaryPart then
+                                ap.PrimaryPart = ax
+                            end
+                            game.ReplicatedStorage.RemoteEvents.RequestStartDraggingItem:FireServer(ap)
+                            ap:SetPrimaryPartCFrame(CFrame.new(ar + Vector3.new(0, 3, 0)))
+                            game.ReplicatedStorage.RemoteEvents.StopDraggingItem:FireServer(ap)
+                            av = av + 1
+                            at = at + 1
+                            task.wait(0.05)
+                            if av >= aw then
+                                break
+                            end
+                        end
+                    end
+                end
+                if av == 0 then
+                    table.insert(as, au)
+                else
+                    print("✅ Brought", av, au, "to", ae)
+                end
+            end
+            if b and #as > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Could not find items",
+                                Content = table.concat(as, ", "),
+                                Duration = 5,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+            if b and at > 0 then
+                pcall(
+                    function()
+                        b:Notify(
+                            {
+                                Title = "Items Brought",
+                                Content = "Successfully brought " .. at .. " item(s) to " .. ae,
+                                Duration = 4,
+                                Icon = "rbxassetid://84501312005643"
+                            }
+                        )
+                    end
+                )
+            end
+        end
+    }
+)
+local aR = r:Tab({Title = "Auto", Icon = "play"})
+local ad = aR:Section({Title = "Lost Child", Icon = "baby"})
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local aS = game:GetService("HttpService")
+local aT = Players.LocalPlayer
+local aU = CFrame.new(4.95910645e-05, 9.5, -7.62939453e-06)
+local aV = {["Old Sack"] = true, ["Good Sack"] = true, ["Giant Sack"] = true}
+local aW = {Dino = "Lost Child", Kraken = "Lost Child2", Squid = "Lost Child3", Koala = "Lost Child4"}
+local aX = {"Dino", "Koala", "Kraken", "Squid"}
+local aY = {}
+local aZ = {}
+local a_ = 1.5
+local b0 =
+    ad:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Lost Child(s)",
+        Desc = "Choose which child(s) to auto pick up",
+        Values = aX,
+        Value = {aX[1]},
+        Multi = true,
+        AllowNone = false,
+        Callback = function(b1)
+            aY = b1
+            print("Selected children: " .. aS:JSONEncode(b1))
+        end
+    }
+)
+local function b2(b3)
+    local b4 = aW[b3]
+    local b5 = aT:FindFirstChild("ItemBag")
+    if not b5 then
+        return false
+    end
+    local b6 = b5:FindFirstChild(b4)
+    if b6 and b6:FindFirstChild(b3) then
+        return true
+    end
+    return false
+end
+local function b7(b3)
+    if b2(b3) then
+        aZ[b3] = true
+        b:Notify(
+            {
+                Title = "Already Found!",
+                Content = b3 .. " is already in your inventory!",
+                Duration = 3,
+                Icon = "rbxassetid://84501312005643"
+            }
+        )
+        return
+    end
+    local b8 = nil
+    local b4 = aW[b3]
+    for k = 1, 50 do
+        b8 = Workspace.Characters:FindFirstChild(b4)
+        if b8 then
+            break
+        end
+        task.wait(0.2)
+    end
+    if b8 then
+        local b9 =
+            b8.PrimaryPart and b8.PrimaryPart.CFrame + Vector3.new(0, 3, 0) or
+            b8:GetModelCFrame() + Vector3.new(0, 3, 0)
+        aT.Character:SetPrimaryPartCFrame(b9)
+        task.wait(0.3)
+        local ba = nil
+        for bb, a2 in pairs(aV) do
+            if aT.Inventory:FindFirstChild(bb) then
+                ba = bb
+                break
+            end
+        end
+        if ba then
+            task.wait(a_)
+            local a, a2 =
+                pcall(
+                function()
+                    ReplicatedStorage.RemoteEvents.RequestBagStoreItem:InvokeServer(aT.Inventory[ba], b8)
+                end
+            )
+            task.wait(0.8)
+            if b2(b3) then
+                aZ[b3] = true
+                b:Notify(
+                    {
+                        Title = "Success",
+                        Content = "Picked up " .. b3 .. "!",
+                        Duration = 3,
+                        Icon = "rbxassetid://84501312005643"
+                    }
+                )
+            else
+                aZ[b3] = false
+                b:Notify(
+                    {
+                        Title = "Failed",
+                        Content = "Pickup failed for " .. b3 .. "!",
+                        Duration = 3,
+                        Icon = "rbxassetid://84501312005643"
+                    }
+                )
+            end
+            aT.Character:SetPrimaryPartCFrame(aU + Vector3.new(0, 2, 0))
+        else
+            b:Notify({Title = "Error", Content = "No sack found!", Duration = 3, Icon = "rbxassetid://84501312005643"})
+        end
+    else
+        b:Notify(
+            {
+                Title = "Not Found",
+                Content = b3 .. " Child not spawned yet!",
+                Duration = 3,
+                Icon = "rbxassetid://84501312005643"
+            }
+        )
+    end
+end
+local function bc(b3)
+    return aZ[b3] or b2(b3)
+end
+local bd = false
+local Z =
+    ad:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Auto Pick Up",
+        Desc = "Auto pick up selected Lost Child",
+        Icon = "bird",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            bd = U
+            print("Auto Pick Up Toggle: " .. tostring(U))
+            if U then
+                spawn(
+                    function()
+                        while bd do
+                            local be = true
+                            for a2, bf in pairs(aY) do
+                                if bc(bf) then
+                                    aZ[bf] = true
+                                else
+                                    be = false
+                                    b7(bf)
+                                    task.wait(0.5)
+                                end
+                            end
+                            if be then
+                                b:Notify(
+                                    {
+                                        Title = "All Collected",
+                                        Content = "You have found the selected children!",
+                                        Duration = 5,
+                                        Icon = "rbxassetid://84501312005643"
+                                    }
+                                )
+                                bd = false
+                                break
+                            end
+                            task.wait(1)
+                        end
+                    end
+                )
+            end
+        end
+    }
+)
+local ad = aR:Section({Title = "Auto Sapling", Icon = "tree-deciduous"})
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local aT = Players.LocalPlayer
+local bg = ReplicatedStorage:WaitForChild("RemoteEvents")
+local function bh(ap)
+    if ap and ap.Parent then
+        pcall(
+            function()
+                bg.RequestStartDraggingItem:FireServer(ap)
+            end
+        )
+        return true
+    end
+    return false
+end
+local function bi(ap, bj)
+    if ap and ap.Parent then
+        local a, err =
+            pcall(
+            function()
+                bg.RequestPlantItem:InvokeServer(ap, bj)
+            end
+        )
+        return a, err
+    end
+    return false, "item missing"
+end
+local function bk(ap)
+    if ap and ap.Parent then
+        pcall(
+            function()
+                bg.StopDraggingItem:FireServer(ap)
+            end
+        )
+        return true
+    end
+    return false
+end
+local bl = Vector3.new(4.95910645e-05, 1.49994469, -7.62939453e-06)
+local aq = Workspace:WaitForChild("Items")
+local bm = 0.1
+local bn = 3
+local bo = "Circle"
+local bq = 8
+local br = 30
+local bs = false
+local bt = false
+local bu = false
+local bv = Workspace:FindFirstChild("AutoSaplingBlueprints")
+if not bv then
+    bv = Instance.new("Folder")
+    bv.Name = "AutoSaplingBlueprints"
+    bv.Parent = Workspace
+end
+local function bw()
+    for a2, bx in ipairs(bv:GetChildren()) do
+        if bx:IsA("BasePart") then
+            bx:Destroy()
+        end
+    end
+end
+local function by(pos, bz)
+    if not bt then
+        return nil
+    end
+    local bA = Instance.new("Part")
+    bA.Name = "Blueprint_" .. bz
+    bA.Size = Vector3.new(1, 0.2, 1)
+    bA.Anchored = true
+    bA.CanCollide = false
+    bA.Transparency = 0.45
+    bA.Material = Enum.Material.Neon
+    bA.CFrame = CFrame.new(pos + Vector3.new(0, 0.1, 0))
+    bA.Parent = bv
+    return bA
+end
+local function bB(bC, bD, distance, bE)
+    local bF = {}
+    if bC == "Circle" then
+        for k = 1, bD do
+            local R = 2 * math.pi * (k - 1) / bD
+            local S = bE.X + math.cos(R) * distance
+            local T = bE.Z + math.sin(R) * distance
+            table.insert(bF, Vector3.new(S, bE.Y, T))
+        end
+    else
+        local bG = math.ceil(math.sqrt(bD))
+        local bH = (bG - 1) / 2
+        local bI = 0
+        for bJ = 0, bG - 1 do
+            for bK = 0, bG - 1 do
+                if bI >= bD then
+                    break
+                end
+                if bJ == 0 or bJ == bG - 1 or bK == 0 or bK == bG - 1 then
+                    local S = bE.X + (bK - bH) * distance
+                    local T = bE.Z + (bJ - bH) * distance
+                    table.insert(bF, Vector3.new(S, bE.Y, T))
+                    bI = bI + 1
+                end
+            end
+        end
+    end
+    return bF
+end
+local function bL(ar, bM)
+    bM = bM or {}
+    local bN, bO
+    for a2, ap in ipairs(aq:GetChildren()) do
+        if ap:IsA("Model") and ap.Name == "Sapling" and not bM[ap] then
+            local primary = ap:FindFirstChildWhichIsA("BasePart") or ap:FindFirstChild("Handle")
+            if primary and primary.Position then
+                local bP = (primary.Position - ar).Magnitude
+                if not bO or bP < bO then
+                    bO = bP
+                    bN = ap
+                end
+            end
+        end
+    end
+    return bN
+end
+local function bQ(bF)
+    if bu then
+        return
+    end
+    bu = true
+    local bM = {}
+    for bz, pos in ipairs(bF) do
+        local bR = bL(pos, bM)
+        local bS = tick()
+        while not bR and tick() - bS < bn do
+            wait(0.15)
+            bR = bL(pos, bM)
+        end
+        if bR then
+            bM[bR] = true
+        end
+        bh(bR)
+        wait(bm)
+        bi(bR, pos)
+        wait(bm)
+        if bR and bR.Parent then
+            bk(bR)
+        end
+        wait(0.1)
+    end
+    bu = false
+end
+local function bT()
+    bw()
+    local bF = bB(bo, bq, br, bl)
+    if bt then
+        for k, pos in ipairs(bF) do
+            by(pos, k)
+        end
+    end
+    if bs then
+        spawn(
+            function()
+                bQ(bF)
+            end
+        )
+    end
+end
+local b0 =
+    ad:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Sapling Placement Mode",
+        Desc = "Circle or Square",
+        Values = {"Circle", "Square"},
+        Default = bo,
+        Callback = function(V)
+            bo = V
+            bT()
+        end
+    }
+)
+local ah =
+    ad:Input(
+    {Title = "Sapling Count", Desc = "Number of saplings", Placeholder = tostring(bq), Callback = function(f)
+            local bU = tonumber(f)
+            if bU and bU > 0 then
+                bq = math.floor(bU)
+                bT()
+            end
+        end}
+)
+local aa =
+    ad:Slider(
+    {
+        Flag = "AutoTab",
+        Title = "Sapling Distance",
+        Desc = "Spacing between saplings",
+        Step = 0.5,
+        Value = {Min = 1, Max = 100, Default = br},
+        Callback = function(V)
+            br = V
+            bT()
+        end
+    }
+)
+local Z =
+    ad:Toggle(
+    {Flag = "AutoTab", Title = "Show Blueprint", Desc = "Show placement blueprint", Value = bt, Callback = function(U)
+            bt = U
+            bT()
+        end}
+)
+local Z =
+    ad:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Auto Plant Saplings",
+        Desc = "Automatically plant saplings (according to blueprint)",
+        Value = bs,
+        Callback = function(U)
+            bs = U
+            bT()
+        end
+    }
+)
+spawn(
+    function()
+        while true do
+            wait(0.5)
+            if bs and not bu then
+                local bF = bB(bo, bq, br, bl)
+                bQ(bF)
+            end
+        end
+    end
+)
+bT()
+print("Auto Sapling optimized script loaded.")
+local ad = aR:Section({Title = "auto chest", Icon = "package-open"})
+local Players = game:GetService("Players")
+local bV = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local bW = game:GetService("StarterGui")
+local aT = Players.LocalPlayer
+local bX = aT.Character or aT.CharacterAdded:Wait()
+local bY = bX:WaitForChild("HumanoidRootPart")
+aT.CharacterAdded:Connect(
+    function()
+        bX = aT.Character or aT.CharacterAdded:Wait()
+        bY = bX:WaitForChild("HumanoidRootPart")
+    end
+)
+local bl = Vector3.new(4.95910645e-05, 9.5, -7.62939453e-06)
+local bZ = 10
+local b_ = 0.10
+local c0 = 0.15
+local function c1(c2, f, c3)
+    c3 = c3 or 3
+    pcall(
+        function()
+            bW:SetCore("SendNotification", {Title = c2, Text = f, Duration = c3})
+        end
+    )
+end
+local c4 = ReplicatedStorage:FindFirstChild("RemoteEvents")
+local function c5(c6, ...)
+    if not c4 then
+        return false
+    end
+    local n = c4:FindFirstChild(c6)
+    if n and n:IsA("RemoteEvent") then
+        local c7 = {...}
+        local ok, err =
+            pcall(
+            function()
+                n:FireServer(unpack(c7))
+            end
+        )
+        if not ok then
+            warn("RemoteEvent '" .. tostring(c6) .. "' failed:", err)
+            return false
+        end
+        return true
+    end
+    warn("RemoteEvent '" .. tostring(c6) .. "' not found")
+    return false
+end
+local function c8(m)
+    return m and m:IsA("Model") and m.PrimaryPart and string.find(string.lower(m.Name), "chest")
+end
+local c9 = {
+    {display = "Halloween Chests", keywords = {"halloween chest", "halloween"}},
+    {display = "Item Chests", keywords = {"item chest", "item chest"}},
+    {display = "Volcanic Chests", keywords = {"volcanic", "volcanic chest"}},
+    {display = "Alien chest", keywords = {"Alien", "AlienChest"}}
+}
+local ca = {}
+for a2, cb in ipairs(c9) do
+    table.insert(ca, cb.display)
+end
+local cc = ca[1]
+local b0 =
+    ad:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Category",
+        Desc = "Choose chest category to collect",
+        Values = ca,
+        Value = cc,
+        Callback = function(b1)
+            cc = b1
+        end
+    }
+)
+local function cd(U)
+    local hum = bX and bX:FindFirstChildOfClass("Humanoid")
+    if hum then
+        if U then
+            hum.WalkSpeed = 0
+            hum.JumpPower = 0
+        else
+            hum.WalkSpeed = 16
+            hum.JumpPower = 50
+        end
+    end
+end
+local ce = {}
+local function cf(cg)
+    if not cg or not cg.PrimaryPart or ce[cg] then
+        return
+    end
+    local hl = Instance.new("Highlight")
+    hl.Name = "ChestHighlight"
+    hl.Adornee = cg
+    hl.Parent = cg
+    hl.FillColor = Color3.new(1, 1, 1)
+    hl.FillTransparency = 0.8
+    hl.OutlineColor = Color3.new(1, 1, 1)
+    hl.OutlineTransparency = 0
+    local gui = Instance.new("BillboardGui")
+    gui.Name = "ChestText"
+    gui.Size = UDim2.new(0, 140, 0, 20)
+    gui.AlwaysOnTop = true
+    gui.Adornee = cg.PrimaryPart
+    gui.Parent = cg
+    local ch = Instance.new("TextLabel")
+    ch.Name = "Label"
+    ch.BackgroundTransparency = 1
+    ch.Size = UDim2.fromScale(1, 1)
+    ch.Font = Enum.Font.Gotham
+    ch.TextScaled = true
+    ch.TextColor3 = Color3.new(1, 1, 1)
+    ch.TextStrokeTransparency = 0.6
+    ch.Parent = gui
+    ce[cg] = {Highlight = hl, Gui = gui, Label = ch}
+end
+local function ci(cg)
+    local entry = ce[cg]
+    if entry then
+        pcall(
+            function()
+                if entry.Highlight then
+                    entry.Highlight:Destroy()
+                end
+            end
+        )
+        pcall(
+            function()
+                if entry.Gui then
+                    entry.Gui:Destroy()
+                end
+            end
+        )
+        ce[cg] = nil
+    end
+end
+local cj = {}
+local function ck(cl)
+    for a2, cb in ipairs(c9) do
+        if cb.display == cl then
+            return cb.keywords
+        end
+    end
+    return {}
+end
+local function cm(cn)
+    local co = {}
+    if not workspace:FindFirstChild("Items") then
+        return co
+    end
+    for a2, cp in ipairs(workspace.Items:GetChildren()) do
+        if cp and cp:IsA("Model") and cp.PrimaryPart then
+            local cq = string.lower(cp.Name)
+            for a2, cr in ipairs(cn) do
+                if string.find(cq, cr) and c8(cp) then
+                    table.insert(co, cp)
+                    break
+                end
+            end
+        end
+    end
+    return co
+end
+local function cs(cg, Q)
+    Q = Q or bZ
+    local res = {}
+    if not cg or not cg.PrimaryPart then
+        return res
+    end
+    if not workspace:FindFirstChild("Items") then
+        return res
+    end
+    local ct = cg.PrimaryPart.Position
+    for a2, ap in ipairs(workspace.Items:GetChildren()) do
+        if ap and ap:IsA("Model") and ap.PrimaryPart and ap ~= cg then
+            if not string.find(string.lower(ap.Name), "chest") then
+                local bP = (ap.PrimaryPart.Position - ct).Magnitude
+                if bP <= Q then
+                    table.insert(res, ap)
+                end
+            end
+        end
+    end
+    return res
+end
+local function cu(ap)
+    if not ap or not ap.PrimaryPart then
+        return false
+    end
+    if not c5("RequestStartDraggingItem", ap) then
+        return false
+    end
+    task.wait(b_)
+    local ok =
+        pcall(
+        function()
+            ap:SetPrimaryPartCFrame(CFrame.new(bl + Vector3.new(0, 3, 0)))
+        end
+    )
+    task.wait(b_)
+    c5("StopDraggingItem", ap)
+    return ok
+end
+local cv = nil
+local function cw(cg)
+    if not cg or not cg.PrimaryPart then
+        return 0
+    end
+    cv = bY.CFrame
+    cd(true)
+    bY.CFrame = cg.PrimaryPart.CFrame + Vector3.new(0, 4, 0)
+    task.wait(0.25)
+    c5("RequestOpenItemChest", cg)
+    task.wait(0.45)
+    local cx = cs(cg)
+    local bD = 0
+    for a2, cy in ipairs(cx) do
+        if cy and cy.PrimaryPart then
+            c5("RequestStartDraggingItem", cy)
+            task.wait(b_)
+            pcall(
+                function()
+                    cy:SetPrimaryPartCFrame(cv + Vector3.new(0, 3, 0))
+                end
+            )
+            task.wait(b_)
+            c5("StopDraggingItem", cy)
+            bD = bD + 1
+        end
+    end
+    cj[cg] = true
+    local cz = ce[cg]
+    if cz and cz.Label then
+        local dist = math.floor((cg.PrimaryPart.Position - bY.Position).Magnitude)
+        cz.Label.Text = cg.Name .. " | " .. tostring(dist) .. "m | Collected"
+    end
+    if cv then
+        bY.CFrame = cv + Vector3.new(0, 4, 0)
+    end
+    task.wait(0.12)
+    cd(false)
+    return bD
+end
+local cA =
+    ad:Button(
+    {Title = "Collect Selected", Desc = "auto collect button", Callback = function()
+            local cn = ck(cc)
+            if #cn == 0 then
+                c1("Failed", "No keywords for category")
+                return
+            end
+            local cB = cm(cn)
+            if #cB == 0 then
+                c1("Failed", "No chests found for " .. cc)
+                return
+            end
+            local cC = 0
+            for a2, cg in ipairs(cB) do
+                if not cj[cg] then
+                    local bx = cw(cg)
+                    cC = cC + bx
+                    c1("Chest Collected", ("%s → %d item(s)"):format(cg.Name, bx))
+                    task.wait(0.12)
+                end
+            end
+            if cC > 0 then
+                c1("Success", ("Collected %d item(s) from category '%s'"):format(cC, cc))
+            else
+                c1("Notice", "No new items collected")
+            end
+        end}
+)
+local cD = false
+local Z =
+    ad:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Auto Collect chest",
+        Desc = "Auto collect chest",
+        Value = false,
+        Callback = function(U)
+            cD = U
+            if cD then
+                spawn(
+                    function()
+                        while cD do
+                            local cn = ck(cc)
+                            if #cn == 0 then
+                                c1("Failed", "No chest found")
+                                cD = false
+                                break
+                            end
+                            local cB = cm(cn)
+                            local cE = false
+                            for a2, cg in ipairs(cB) do
+                                if not cD then
+                                    break
+                                end
+                                if not cj[cg] then
+                                    cE = true
+                                    local bx = cw(cg)
+                                    c1("Chest Collected", ("%s → %d item(s)"):format(cg.Name, bx))
+                                    task.wait(0.12)
+                                end
+                            end
+                            if not cE then
+                                c1("Finished", "No more new chests found explore the map")
+                                cD = false
+                                break
+                            end
+                            task.wait(0.25)
+                        end
+                    end
+                )
+            end
+        end
+    }
+)
+local cF = false
+local Z =
+    ad:Toggle(
+    {Flag = "AutoTab", Title = "Chest ESP", Desc = "Show chest highlight", Value = false, Callback = function(s)
+            cF = s
+            if not s then
+                for cp, a2 in pairs(ce) do
+                    ci(cp)
+                end
+            end
+        end}
+)
+bV.RenderStepped:Connect(
+    function()
+        if not cF then
+            return
+        end
+        if not workspace:FindFirstChild("Items") then
+            return
+        end
+        local cG = {}
+        for a2, cb in ipairs(c9) do
+            local cB = cm(cb.keywords)
+            for a2, cg in ipairs(cB) do
+                cG[cg] = true
+                cf(cg)
+                local cz = ce[cg]
+                if cz and cz.Label and bY and cg.PrimaryPart then
+                    local dist = math.floor((cg.PrimaryPart.Position - bY.Position).Magnitude)
+                    local f = cg.Name .. " | " .. tostring(dist) .. "m"
+                    if cj[cg] then
+                        f = f .. " | Collected"
+                    end
+                    cz.Label.Text = f
+                end
+            end
+        end
+        for cp, a2 in pairs(ce) do
+            if not cG[cp] then
+                ci(cp)
+            end
+        end
+    end
+)
+local ad = aR:Section({Title = "auto fuel", Icon = "flame"})
+local bV = game:GetService("RunService")
+local cH = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvents")
+local Workspace = game:GetService("Workspace")
+local cI = {
+    Enabled = false,
+    Threshold = 70,
+    SelectedFuel = {"All"},
+    MaxPerCycle = 12,
+    ESPEnabled = false,
+    _lastFail = 0,
+    _lastNotify = 0
+}
+local ay = {"Corpse", "Alien", "Log", "Chair", "Coal", "Fuel Canister", "Biofuel"}
+_G.RyZen_DragLock = _G.RyZen_DragLock or false
+local function cJ(ap)
+    if not ap or not ap.Parent or not ap.PrimaryPart then
+        return false
+    end
+    if ap.GetAttribute and ap:GetAttribute("RyZen_BeingDragged") then
+        return false
+    end
+    if _G.RyZen_DragLock then
+        return false
+    end
+    _G.RyZen_DragLock = true
+    local ok = false
+    pcall(
+        function()
+            if cH and cH:FindFirstChild("RequestStartDraggingItem") then
+                cH.RequestStartDraggingItem:FireServer(ap)
+                ok = true
+                if ap.SetAttribute then
+                    pcall(
+                        function()
+                            ap:SetAttribute("RyZen_BeingDragged", "AutoFuel")
+                        end
+                    )
+                end
+            end
+        end
+    )
+    if not ok then
+        _G.RyZen_DragLock = false
+    end
+    return ok
+end
+local function cK(ap)
+    pcall(
+        function()
+            if cH and cH:FindFirstChild("StopDraggingItem") then
+                cH.StopDraggingItem:FireServer(ap)
+            end
+        end
+    )
+    if ap and ap.SetAttribute then
+        pcall(
+            function()
+                ap:SetAttribute("RyZen_BeingDragged", nil)
+            end
+        )
+    end
+    _G.RyZen_DragLock = false
+end
+ad:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Fuel Types",
+        Desc = "Pick which fuels to bring ( don't select any to bring all!)",
+        Values = ay,
+        Value = {"All"},
+        Multi = true,
+        AllowNone = false,
+        Callback = function(af)
+            if type(af) ~= "table" then
+                cI.SelectedFuel = {tostring(af)}
+            else
+                cI.SelectedFuel = af
+            end
+            print("[AutoFuel] SelectedFuel ->", table.concat(cI.SelectedFuel, ", "))
+        end
+    }
+)
+ad:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Auto Fuel",
+        Desc = "Auto bring fuel when below slider!",
+        Default = false,
+        Callback = function(U)
+            cI.Enabled = U
+            print("[AutoFuel] Enabled ->", U)
+        end
+    }
+)
+ad:Slider(
+    {
+        Flag = "AutoTab",
+        Title = "Bring When Fuel",
+        Desc = "Bring when campfire fuel is below this slider",
+        Step = 1,
+        Value = {Min = 0, Max = 200, Default = cI.Threshold},
+        Callback = function(V)
+            cI.Threshold = math.floor(V)
+            print("[AutoFuel] Threshold ->", cI.Threshold)
+        end
+    }
+)
+ad:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Fuel ESP",
+        Desc = "Show campfire fuel health",
+        Default = false,
+        Callback = function(U)
+            cI.ESPEnabled = U
+            if not U then
+                pcall(
+                    function()
+                        destroyFuelESP()
+                    end
+                )
+            end
+        end
+    }
+)
+local function cL(au, aD)
+    if not au or not aD then
+        return false
+    end
+    return string.find(string.lower(au), string.lower(aD), 1, true) ~= nil
+end
+local function cM()
+    if cI.SelectedFuel and table.find(cI.SelectedFuel, "All") then
+        local cN = {}
+        for a2, cO in ipairs(ay) do
+            table.insert(cN, cO)
+        end
+        return cN
+    else
+        local cP = {}
+        if cI.SelectedFuel then
+            for a2, cO in ipairs(cI.SelectedFuel) do
+                table.insert(cP, cO)
+            end
+        end
+        return cP
+    end
+end
+local cQ = nil
+local cR = nil
+function ensureFuelESP(cS)
+    if cQ and (not cQ.Parent or not cQ.Adornee) then
+        pcall(
+            function()
+                cQ:Destroy()
+            end
+        )
+        cQ = nil
+    end
+    if cR and cQ == nil then
+        pcall(
+            function()
+                cR:Disconnect()
+            end
+        )
+        cR = nil
+    end
+    if not cI.ESPEnabled then
+        return
+    end
+    if not cS or not cS.PrimaryPart then
+        return
+    end
+    if cQ and cQ.Adornee == cS.PrimaryPart then
+        return
+    end
+    if cQ then
+        pcall(
+            function()
+                cQ:Destroy()
+            end
+        )
+    end
+    local gui = Instance.new("BillboardGui")
+    gui.Name = "FuelESP"
+    gui.Size = UDim2.new(0, 160, 0, 40)
+    gui.Adornee = cS.PrimaryPart
+    gui.AlwaysOnTop = true
+    gui.StudsOffset = Vector3.new(0, 3, 0)
+    local txt = Instance.new("TextLabel")
+    txt.Size = UDim2.new(1, 0, 1, 0)
+    txt.BackgroundTransparency = 1
+    txt.TextColor3 = Color3.fromRGB(255, 255, 255)
+    txt.TextStrokeTransparency = 0
+    txt.TextScaled = true
+    txt.Font = Enum.Font.Gotham
+    txt.Parent = gui
+    gui.Parent = cS
+    cQ = gui
+    if cR then
+        pcall(
+            function()
+                cR:Disconnect()
+            end
+        )
+    end
+    cR =
+        bV.Heartbeat:Connect(
+        function()
+            if not cQ or not cQ.Parent or not cS or not cS.Parent or not cS.PrimaryPart then
+                pcall(
+                    function()
+                        if cQ then
+                            cQ:Destroy()
+                        end
+                    end
+                )
+                cQ = nil
+                if cR then
+                    cR:Disconnect()
+                    cR = nil
+                end
+                return
+            end
+            cQ.Enabled = cI.ESPEnabled
+            local cT = cS:GetAttribute("FuelRemaining") or 0
+            local cU = cS:GetAttribute("FuelTarget") or 0
+            txt.Text = ("🔥 %d / %d | Threshold: %d"):format(cT, cU, cI.Threshold or 0)
+        end
+    )
+end
+function destroyFuelESP()
+    if cR then
+        pcall(
+            function()
+                cR:Disconnect()
+            end
+        )
+    end
+    cR = nil
+    if cQ then
+        pcall(
+            function()
+                cQ:Destroy()
+            end
+        )
+    end
+    cQ = nil
+end
+task.spawn(
+    function()
+        while true do
+            task.wait(0.7)
+            local cV = true
+            local cW = Workspace:FindFirstChild("Map")
+            local cX = cW and cW:FindFirstChild("Campground")
+            local cY = cX and cX:FindFirstChild("MainFire")
+            if not cY or not cY.PrimaryPart then
+                pcall(
+                    function()
+                        destroyFuelESP()
+                    end
+                )
+                cV = false
+            end
+            if cV and cI.ESPEnabled and cY then
+                pcall(
+                    function()
+                        ensureFuelESP(cY)
+                    end
+                )
+            end
+            if cV and not cI.Enabled then
+                cV = false
+            end
+            local cZ = 0
+            if cV and cY then
+                cZ = cY:GetAttribute("FuelRemaining") or 0
+                if cZ >= cI.Threshold then
+                    cV = false
+                end
+            end
+            local aq = nil
+            if cV then
+                aq = Workspace:FindFirstChild("Items")
+                if not aq then
+                    if b and time() - cI._lastFail > 6 then
+                        cI._lastFail = time()
+                        pcall(
+                            function()
+                                b:Notify(
+                                    {
+                                        Title = "Auto Fuel",
+                                        Icon = "rbxassetid://84501312005643",
+                                        Content = "No items folder found in workspace.",
+                                        Duration = 3
+                                    }
+                                )
+                            end
+                        )
+                    end
+                    cV = false
+                end
+            end
+            local c_ = nil
+            if cV then
+                c_ = cM()
+                local d0 = c_ and type(c_) == "table" and #c_ > 0
+                if not d0 then
+                    if b and time() - cI._lastFail > 2 then
+                        cI._lastFail = time()
+                        pcall(
+                            function()
+                                b:Notify(
+                                    {
+                                        Title = "Auto Fuel",
+                                        Icon = "rbxassetid://84501312005643",
+                                        Content = "No fuel selected — choose a fuel type!",
+                                        Duration = 3
+                                    }
+                                )
+                            end
+                        )
+                    end
+                    cV = false
+                end
+            end
+            if cV and #cI.SelectedFuel == 1 and cI.SelectedFuel[1] == "All" then
+                c_ = cM()
+            end
+            if not cV then
+            else
+                local d1 = false
+                local d2 = 0
+                local ar = Vector3.new(4.95910645e-05, 9.5, -7.62939453e-06)
+                for a2, aD in ipairs(c_) do
+                    local d3 = 0
+                    local children = aq:GetChildren()
+                    for a2, ap in ipairs(children) do
+                        if d3 >= cI.MaxPerCycle then
+                            break
+                        end
+                        if not ap or not ap:IsA("Model") or not ap.PrimaryPart then
+                        else
+                            if cL(ap.Name, aD) then
+                                d1 = true
+                                cZ = cY:GetAttribute("FuelRemaining") or cZ
+                                if cZ >= cI.Threshold then
+                                    break
+                                end
+                                if cJ(ap) then
+                                    task.wait(0.05)
+                                    pcall(
+                                        function()
+                                            if ap.PrimaryPart then
+                                                ap:SetPrimaryPartCFrame(CFrame.new(ar))
+                                            end
+                                        end
+                                    )
+                                    task.wait(0.06)
+                                    cK(ap)
+                                    d3 = d3 + 1
+                                    d2 = d2 + 1
+                                    task.wait(0.06)
+                                end
+                            end
+                        end
+                    end
+                    cZ = cY:GetAttribute("FuelRemaining") or cZ
+                    if cZ >= cI.Threshold then
+                        break
+                    end
+                end
+                if b then
+                    if d2 > 0 then
+                        local d4 = cY:GetAttribute("FuelRemaining") or cZ
+                        pcall(
+                            function()
+                                b:Notify(
+                                    {
+                                        Title = "Auto Fuel",
+                                        Icon = "rbxassetid://84501312005643",
+                                        Content = ("Success collected (%d items). Fuel is now (%d)."):format(d2, d4),
+                                        Duration = 3
+                                    }
+                                )
+                            end
+                        )
+                    elseif not d1 and time() - cI._lastFail > 2 then
+                        cI._lastFail = time()
+                        pcall(
+                            function()
+                                b:Notify(
+                                    {
+                                        Title = "Auto Fuel",
+                                        Icon = "rbxassetid://84501312005643",
+                                        Content = "Failed. No items found explore the map!",
+                                        Duration = 3
+                                    }
+                                )
+                            end
+                        )
+                    end
+                end
+            end
+        end
+    end
+)
+local ad = aR:Section({Title = "Auto Cut Trees", Icon = "axe"})
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local aS = game:GetService("HttpService")
+local d5 = Players.LocalPlayer
+local d6 = {
+    AutoCut = false,
+    Targets = {"All"},
+    Range = 80,
+    ShowHP = false,
+    HitDelay = 0.01,
+    ConfirmDropTimeout = 2.0,
+    TryDamageValues = {"1"},
+    TrySignatures = {"tool_damage_numeric_cframe", "tool_damage_string_cframe", "tool_damage_count_cframe"}
+}
+local function d7()
+    local c = "ToolDamageObject"
+    local d8 = ReplicatedStorage:FindFirstChild(c)
+    if d8 and (d8.ClassName == "RemoteFunction" or d8.ClassName == "RemoteEvent") then
+        return d8
+    end
+    for a2, cO in ipairs(ReplicatedStorage:GetDescendants()) do
+        if cO.Name == c and (cO.ClassName == "RemoteFunction" or cO.ClassName == "RemoteEvent") then
+            return cO
+        end
+    end
+    return nil
+end
+local d9 = d7()
+if d9 then
+    print("[AutoCut] Found remote:", d9:GetFullName(), "class:", d9.ClassName)
+else
+    warn("[AutoCut] ToolDamageObject remote NOT found under ReplicatedStorage — script may fail.")
+end
+local function da()
+    local root = Workspace:FindFirstChild("Map") or Workspace:FindFirstChild("map")
+    if not root then
+        return nil, nil
+    end
+    local db = root:FindFirstChild("Foliage") or root:FindFirstChild("foliage")
+    local dc = root:FindFirstChild("Landmarks") or root:FindFirstChild("landmarks")
+    return db, dc
+end
+local function dd(m)
+    if not m or not m:IsA("Model") then
+        return false
+    end
+    if type(m.GetAttribute) ~= "function" then
+        return false
+    end
+    local de = m:GetAttribute("Health")
+    return de ~= nil
+end
+local function df(dg)
+    dg = tonumber(dg) or d6.Range
+    local cP = {}
+    local db, dc = da()
+    local char = d5.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then
+        return cP
+    end
+    local hrp = char.HumanoidRootPart
+    local function dh(di)
+        if not di then
+            return
+        end
+        for a2, a3 in ipairs(di:GetChildren()) do
+            if dd(a3) then
+                local part = a3.PrimaryPart or a3:FindFirstChildWhichIsA("BasePart")
+                if part then
+                    local dist = (part.Position - hrp.Position).Magnitude
+                    if dist <= dg then
+                        table.insert(cP, a3)
+                    end
+                end
+            end
+        end
+    end
+    dh(db)
+    dh(dc)
+    return cP
+end
+local function dj(dk, dl, list)
+    if not dk then
+        return
+    end
+    for a2, cO in ipairs(dk:GetChildren()) do
+        if cO and cO.Name then
+            local dm = false
+            if type(cO.GetAttribute) == "function" then
+                if cO:GetAttribute("WeaponDamage") ~= nil or cO:GetAttribute("ToolCooldown") ~= nil then
+                    dm = true
+                end
+            end
+            table.insert(list, {inst = cO, source = dl, special = dm})
+        end
+    end
+end
+local function dn()
+    local dp = {}
+    dj(d5:FindFirstChild("Inventory"), "Inventory", dp)
+    dj(d5.Character, "Character", dp)
+    dj(d5:FindFirstChild("Backpack"), "Backpack", dp)
+    table.sort(
+        dp,
+        function(dq, p)
+            return (dq.special and 1 or 0) > (p.special and 1 or 0)
+        end
+    )
+    local seen = {}
+    local cP = {}
+    for a2, bx in ipairs(dp) do
+        if bx.inst and not seen[bx.inst] then
+            seen[bx.inst] = true
+            table.insert(cP, bx)
+        end
+    end
+    return cP
+end
+local dr = {"Chainsaw", "Strong Axe", "Good Axe", "Old Axe"}
+local function ds(dt)
+    for a2, du in ipairs(dr) do
+        for a2, bx in ipairs(dt) do
+            if bx.inst and bx.inst.Name and string.find(string.lower(bx.inst.Name), string.lower(du)) then
+                return bx.inst, bx.source
+            end
+        end
+    end
+    if #dt > 0 then
+        return dt[1].inst, dt[1].source
+    end
+    return nil, nil
+end
+local function dv(pos, dw, Q)
+    Q = Q or 10
+    dw = dw or d6.ConfirmDropTimeout
+    local dx = Workspace:FindFirstChild("Items") or Workspace:FindFirstChild("items")
+    if not dx then
+        return false, "no items folder"
+    end
+    local dy = {}
+    for a2, bx in ipairs(dx:GetChildren()) do
+        dy[bx] = true
+    end
+    local dz = 0
+    while dz < dw do
+        for a2, bx in ipairs(dx:GetChildren()) do
+            if not dy[bx] then
+                if pos and (bx:IsA("Model") or bx:IsA("BasePart")) then
+                    local part = bx:FindFirstChildWhichIsA("BasePart") or bx:IsA("BasePart") and bx
+                    if part and (part.Position - pos).Magnitude <= Q then
+                        return true, bx
+                    end
+                else
+                    return true, bx
+                end
+            end
+        end
+        task.wait(0.02)
+        dz = dz + 0.12
+    end
+    return false, "no new drop"
+end
+local function dA(dB, F)
+    if dB == nil then
+        return nil
+    end
+    local dC = F:GetAttribute("Health")
+    if dC == nil then
+        return nil
+    end
+    return tonumber(dC) < tonumber(dB)
+end
+local function dD(dE, dF)
+    if not dE then
+        return false, "no remote"
+    end
+    if type(dF) ~= "table" then
+        return false, "args must be table"
+    end
+    if dE.ClassName == "RemoteFunction" then
+        local ok, res =
+            pcall(
+            function()
+                return dE:InvokeServer(unpack(dF))
+            end
+        )
+        if ok then
+            return true, res
+        else
+            return false, res
+        end
+    else
+        local ok, res =
+            pcall(
+            function()
+                dE:FireServer(unpack(dF))
+                return true
+            end
+        )
+        if ok then
+            return true, res
+        else
+            return false, res
+        end
+    end
+end
+local hitCounter = 1
+local function dG(dE, dH, dI)
+    if not dE or not dH or not dI then
+        return false, "missing param"
+    end
+    local part = dI.PrimaryPart or dI:FindFirstChildWhichIsA("BasePart")
+    if not part then
+        return false, "no basepart"
+    end
+    local dJ = {}
+    if type(dH.GetAttribute) == "function" then
+        local dK = dH:GetAttribute("WeaponDamage")
+        if dK ~= nil then
+            table.insert(dJ, dK)
+        end
+        local dL = dH:GetAttribute("WeaponResourceDamage")
+        if dL ~= nil then
+            table.insert(dJ, dL)
+        end
+    end
+    for a2, cO in ipairs(d6.TryDamageValues) do
+        table.insert(dJ, cO)
+    end
+    local dM = {}
+    local dN = {}
+    for a2, cO in ipairs(dJ) do
+        local s = tostring(cO)
+        if not dM[s] then
+            dM[s] = true
+            table.insert(dN, cO)
+        end
+    end
+    if #dN == 0 then
+        dN = {"1"}
+    end
+    for a2, dO in ipairs(d6.TrySignatures) do
+        for a2, dP in ipairs(dN) do
+            local a, dQ = false, nil
+            local c7 = nil
+            if dO == "tool_damage_numeric_cframe" then
+                c7 = {dI, dH, dP, d5.Character and d5.Character:GetPivot() or CFrame.new(part.Position)}
+            elseif dO == "tool_damage_string_cframe" then
+                c7 = {dI, dH, tostring(dP), d5.Character and d5.Character:GetPivot() or CFrame.new(part.Position)}
+            elseif dO == "tool_damage_count_cframe" then
+                c7 = {
+                    dI,
+                    dH,
+                    "1",
+                    tostring(hitCounter),
+                    d5.Character and d5.Character:GetPivot() or CFrame.new(part.Position)
+                }
+            else
+                c7 = {dI, dH, tostring(dP), d5.Character and d5.Character:GetPivot() or CFrame.new(part.Position)}
+            end
+            local ok, res = dD(dE, c7)
+            task.wait(0.12)
+            local dR = nil
+            local dS = dA(dI:GetAttribute("Health"), dI)
+            if dS == true then
+                hitCounter = hitCounter + 1
+                return true, "health decreased with sig " .. dO .. " dmg=" .. tostring(dP)
+            end
+            local pos = part and part.Position and part.Position or nil
+            local dT, dU = dv(pos, 0.25, 12)
+            if dT then
+                hitCounter = hitCounter + 1
+                return true, "drop detected with sig " .. dO .. " dmg=" .. tostring(dP) .. " drop=" .. tostring(dU.Name)
+            end
+            if ok then
+                hitCounter = hitCounter + 1
+                return true, "remote call returned ok for sig " .. dO .. " dmg=" .. tostring(dP)
+            end
+            task.wait(0.2)
+        end
+    end
+    return false, "exhausted signatures"
+end
+espFolder = Workspace:FindFirstChild("TreeHPESP") or Instance.new("Folder", Workspace)
+espFolder.Name = "TreeHPESP"
+espMap = espMap or {}
+d6 = d6 or {}
+d6.ShowHP = d6.ShowHP or false
+espMap = {}
+d6 = d6 or {}
+d6.ShowHP = d6.ShowHP or false
+espFolder = Workspace:FindFirstChild("TreeHPESP") or Instance.new("Folder", Workspace)
+espFolder.Name = "TreeHPESP"
+espMap = espMap or {}
+function removeESP(dI)
+    local dQ = espMap[dI]
+    if dQ then
+        pcall(
+            function()
+                if dQ.bb and dQ.bb.Parent then
+                    dQ.bb:Destroy()
+                end
+            end
+        )
+        espMap[dI] = nil
+    end
+end
+function removeAllESP()
+    for dI, a2 in pairs(espMap) do
+        removeESP(dI)
+    end
+end
+function updateESP(dI)
+    if not d6.ShowHP then
+        return removeESP(dI)
+    end
+    if not dI or not dI.Parent then
+        return removeESP(dI)
+    end
+    local root = dI.PrimaryPart or dI:FindFirstChildWhichIsA("BasePart")
+    if not root then
+        return removeESP(dI)
+    end
+    local dQ = espMap[dI]
+    if not dQ then
+        local dV = Instance.new("BillboardGui")
+        dV.Name = "AutoCut_HP"
+        dV.Adornee = root
+        dV.Size = UDim2.new(0, 120, 0, 22)
+        dV.StudsOffset = Vector3.new(0, 2.2, 0)
+        dV.AlwaysOnTop = true
+        dV.Parent = espFolder
+        local dW = Instance.new("TextLabel")
+        dW.Size = UDim2.fromScale(1, 1)
+        dW.BackgroundTransparency = 1
+        dW.Font = Enum.Font.GothamBold
+        dW.TextScaled = true
+        dW.TextColor3 = Color3.new(1, 1, 1)
+        dW.Parent = dV
+        espMap[dI] = {bb = dV, lbl = dW}
+        dQ = espMap[dI]
+    end
+    local de = dI:GetAttribute("Health")
+    dQ.lbl.Text = (dI.Name or "Tree") .. " | HP: " .. (de and math.floor(tonumber(de) or de) or "N/A")
+    dQ.bb.Enabled = d6.ShowHP
+end
+game:GetService("RunService").RenderStepped:Connect(
+    function()
+        if not d6.ShowHP then
+            return
+        end
+        local db, dc = Workspace:FindFirstChild("Map") or Workspace:FindFirstChild("map")
+        if db then
+            db = db:FindFirstChild("Foliage") or db:FindFirstChild("foliage")
+        end
+        if dc then
+            dc = dc:FindFirstChild("Landmarks") or dc:FindFirstChild("landmarks")
+        end
+        local dX = {}
+        if db then
+            for a2, l in ipairs(db:GetChildren()) do
+                if l:GetAttribute("Health") then
+                    table.insert(dX, l)
+                end
+            end
+        end
+        if dc then
+            for a2, l in ipairs(dc:GetChildren()) do
+                if l:GetAttribute("Health") then
+                    table.insert(dX, l)
+                end
+            end
+        end
+        for a2, l in ipairs(dX) do
+            updateESP(l)
+        end
+    end
+)
+Workspace.DescendantRemoving:Connect(
+    function(dY)
+        if espMap[dY] then
+            removeESP(dY)
+        end
+    end
+)
+task.spawn(
+    function()
+        while true do
+            task.wait(1)
+            if not d6.AutoCut then
+                task.wait(1)
+            else
+                local dX = df(d6.Range)
+                if #dX == 0 then
+                    task.wait(1)
+                else
+                    local dp = dn()
+                    local dH, dZ = ds(dp)
+                    if not dH then
+                        print("[AutoCut] No tool candidate found. Candidates:", #dp)
+                        task.wait(1)
+                    else
+                        for a2, dI in ipairs(dX) do
+                            task.spawn(
+                                function()
+                                    if dI and dI.Parent then
+                                        local af = d6.Targets or {"All"}
+                                        local d_ = false
+                                        for a2, cO in ipairs(af) do
+                                            if cO == "All" then
+                                                d_ = true
+                                                break
+                                            end
+                                        end
+                                        local cV = d_
+                                        if not d_ then
+                                            local e0 = (dI.Name or ""):lower()
+                                            for a2, cO in ipairs(af) do
+                                                if e0:find(cO:lower()) then
+                                                    cV = true
+                                                    break
+                                                end
+                                            end
+                                        end
+                                        if cV then
+                                            if d6.ShowHP then
+                                                updateESP(dI)
+                                            end
+                                            local ok, dQ = dG(d9, dH, dI)
+                                            print("[AutoCut] Hit result:", tostring(ok), tostring(dQ))
+                                        end
+                                    end
+                                end
+                            )
+                        end
+                    end
+                end
+            end
+        end
+    end
+)
+local b0 =
+    ad:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Tree Types",
+        Desc = "Choose tree types (choosing all might slow down cutting and lags you)",
+        Values = {"All", "Small Tree", "Snowy Small Tree", "TreeBig1", "TreeBig2", " TreeBig3"},
+        Value = "All",
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e1)
+            if type(e1) == "table" and #e1 > 0 then
+                d6.Targets = e1
+            else
+                d6.Targets = {"All"}
+            end
+            print("Targets ->", aS:JSONEncode(d6.Targets))
+        end
+    }
+)
+local ah =
+    ad:Input(
+    {Title = "Range", Desc = "Max distance", Value = tostring(d6.Range), Callback = function(cO)
+            local bU = tonumber(cO)
+            if bU then
+                d6.Range = math.clamp(bU, 1, 2000)
+                print("Range ->", d6.Range)
+            end
+        end}
+)
+local Z =
+    ad:Toggle(
+    {Flag = "AutoTab", Title = "Auto Cut", Desc = "Enable AutoCut", Value = d6.AutoCut, Callback = function(cO)
+            d6.AutoCut = not (not cO)
+        end}
+)
+local Z =
+    ad:Toggle(
+    {Flag = "AutoTab", Title = "Show Tree HP", Desc = "Toggle Tree HP ESP", Value = d6.ShowHP, Callback = function(cO)
+            d6.ShowHP = not (not cO)
+            if not d6.ShowHP then
+                removeAllESP()
+            end
+        end}
+)
+ad = aR:Section({Title = "collect coins and flowers", Icon = "flower"})
+Players = game:GetService("Players")
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+Workspace = game:GetService("Workspace")
+bW = game:GetService("StarterGui")
+aT = Players.LocalPlayer
+remotesFolder = ReplicatedStorage:FindFirstChild("RemoteEvents") or ReplicatedStorage
+coinRemote = remotesFolder:FindFirstChild("RequestCollectCoints") or remotesFolder:FindFirstChild("RequestCollectCoins")
+flowerRemote = remotesFolder:FindFirstChild("RequestPickFlower") or remotesFolder:FindFirstChild("RequestPickFlowers")
+State = {RunningCoins = false, RunningFlowers = false, PerItemDelay = 0.05, BetweenItems = 0.03}
+function safeNotify(c2, f)
+    pcall(
+        function()
+            bW:SetCore("SendNotification", {Title = c2, Text = f, Duration = 2})
+        end
+    )
+    print("[Notify]", c2, "-", f)
+end
+function safeGetPosition(ap)
+    if not ap then
+        return nil
+    end
+    if ap:IsA("BasePart") then
+        return ap.Position
+    end
+    if ap.PrimaryPart then
+        return ap.PrimaryPart.Position
+    end
+    local part = ap:FindFirstChildWhichIsA("BasePart", true)
+    if part then
+        return part.Position
+    end
+    return nil
+end
+function callRemoteWithCandidates(dE, ap)
+    if not dE or not ap then
+        return false
+    end
+    local dp = {ap}
+    if ap.Parent then
+        table.insert(dp, ap.Parent)
+    end
+    if ap.PrimaryPart then
+        table.insert(dp, ap.PrimaryPart)
+    end
+    for a2, bx in ipairs(dp) do
+        local ok, a2 =
+            pcall(
+            function()
+                if dE.InvokeServer then
+                    dE:InvokeServer(bx)
+                elseif dE.FireServer then
+                    dE:FireServer(bx)
+                end
+            end
+        )
+        if ok then
+            return true
+        end
+    end
+    return false
+end
+function safeTPToPos(pos)
+    if not pos then
+        return
+    end
+    local hrp = aT.Character and aT.Character:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        pcall(
+            function()
+                hrp.CFrame = CFrame.new(pos + Vector3.new(0, 3, 0))
+            end
+        )
+    end
+end
+function findCoins()
+    local cP = {}
+    local root = Workspace:FindFirstChild("Items") or Workspace
+    for a2, cO in ipairs(root:GetDescendants()) do
+        if (cO:IsA("Model") or cO:IsA("BasePart")) and cO.Name:lower():find("coin") then
+            table.insert(cP, cO)
+        end
+    end
+    return cP
+end
+function findFlowers()
+    local cP = {}
+    for a2, cO in ipairs(Workspace:GetDescendants()) do
+        if (cO:IsA("Model") or cO:IsA("BasePart")) and cO.Name:lower():find("flower") then
+            table.insert(cP, cO)
+        end
+    end
+    return cP
+end
+function collectLoop(ch, e2, dE, e3)
+    task.spawn(
+        function()
+            while State[e3] do
+                local cx = e2()
+                for a2, ap in ipairs(cx) do
+                    if not State[e3] then
+                        break
+                    end
+                    local pos = safeGetPosition(ap)
+                    if pos then
+                        safeTPToPos(pos)
+                    end
+                    callRemoteWithCandidates(dE, ap)
+                    task.wait(State.PerItemDelay)
+                end
+                task.wait(State.BetweenItems)
+            end
+            safeNotify("Auto Collect", ch .. " stopped.")
+        end
+    )
+end
+function startCollectCoins()
+    if State.RunningCoins then
+        return
+    end
+    State.RunningCoins = true
+    collectLoop("Coins", findCoins, coinRemote, "RunningCoins")
+end
+function stopCollectCoins()
+    State.RunningCoins = false
+end
+function startCollectFlowers()
+    if State.RunningFlowers then
+        return
+    end
+    State.RunningFlowers = true
+    collectLoop("Flowers", findFlowers, flowerRemote, "RunningFlowers")
+end
+function stopCollectFlowers()
+    State.RunningFlowers = false
+end
+Z =
+    ad:Toggle(
+    {Title = "Auto Collect Coins", Desc = "Collect coins continuously", Default = false, Callback = function(cO)
+            if cO then
+                startCollectCoins()
+            else
+                stopCollectCoins()
+            end
+        end}
+)
+Z =
+    ad:Toggle(
+    {Title = "Auto Collect Flowers", Desc = "Collect flowers continuously", Default = false, Callback = function(cO)
+            if cO then
+                startCollectFlowers()
+            else
+                stopCollectFlowers()
+            end
+        end}
+)
+safeNotify(" Join our Discord!")
+local e4 = r:Tab({Title = "Teleport", Icon = "map-pin"})
+TPStructSection = e4:Section({Title = "Structures", Icon = "map-pin"})
+structuresFolder = workspace.Map.Landmarks
+npcFolder = workspace.Characters
+structuresList = {
+    "Stronghold",
+    "AlienMothership",
+    "Frog Cave",
+    "Military Base",
+    "Ice Temple",
+    "Bell Tower",
+    "Research Facility",
+    "Anvil",
+    "Snow Clothing Shop",
+    "Fishing Hut",
+    "Volcano",
+    "Cultist Generator Base",
+    "Kings Palace"
+}
+npcList = {"Fairy", "Caravan", "Bird Watcher", "Pelt Trader"}
+selectedStructure = structuresList[1]
+selectedNPC = npcList[1]
+notifySpawnToggle = false
+notifiedStructures = {}
+notifiedNPCs = {}
+function teleportTo(pos)
+    d5 = game.Players.LocalPlayer
+    if d5 and d5.Character and d5.Character:FindFirstChild("HumanoidRootPart") then
+        d5.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+    end
+end
+e4:Dropdown(
+    {
+        Title = "Structure",
+        Desc = "Select a structure",
+        Values = structuresList,
+        Value = selectedStructure,
+        Callback = function(b1)
+            selectedStructure = b1
+        end
+    }
+)
+e4:Button(
+    {Title = "TP to Structure", Desc = "Teleport to selected structure", Callback = function()
+            struct = structuresFolder:FindFirstChild(selectedStructure)
+            if struct and struct.PrimaryPart then
+                teleportTo(struct.PrimaryPart.Position)
+            else
+                b:Notify({Title = "TP Failed", Content = "Structure not spawned/too far away!", Duration = 3})
+            end
+        end}
+)
+e4:Divider()
+e4:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "NPC",
+        Desc = "Select an NPC",
+        Values = npcList,
+        Value = selectedNPC,
+        Callback = function(b1)
+            selectedNPC = b1
+        end
+    }
+)
+e4:Button(
+    {Title = "TP to NPC", Desc = "Teleport to selected NPC", Callback = function()
+            npc = npcFolder:FindFirstChild(selectedNPC)
+            if npc and npc.PrimaryPart then
+                teleportTo(npc.PrimaryPart.Position)
+            else
+                b:Notify({Title = "TP Failed", Content = "NPC not spawned/too far!", Duration = 3})
+            end
+        end}
+)
+e4:Divider()
+e4:Toggle(
+    {Flag = "AutoTab", Title = "Notify on Spawn", Desc = "Notify when structure or NPC spawns", Callback = function(U)
+            notifySpawnToggle = U
+        end}
+)
+task.spawn(
+    function()
+        while true do
+            for a2, e5 in ipairs(structuresList) do
+                struct = structuresFolder:FindFirstChild(e5)
+                if struct and not notifiedStructures[e5] then
+                    notifiedStructures[e5] = true
+                    if notifySpawnToggle then
+                        b:Notify({Title = "Structure Spawned", Content = e5 .. " has spawned!", Duration = 3})
+                    end
+                elseif not struct then
+                    notifiedStructures[e5] = nil
+                end
+            end
+            for a2, e6 in ipairs(npcList) do
+                npc = npcFolder:FindFirstChild(e6)
+                if npc and not notifiedNPCs[e6] then
+                    notifiedNPCs[e6] = true
+                    if notifySpawnToggle then
+                        b:Notify({Title = "NPC Spawned", Content = e6 .. " has spawned!", Duration = 3})
+                    end
+                elseif not npc then
+                    notifiedNPCs[e6] = nil
+                end
+            end
+            task.wait(1)
+        end
+    end
+)
+VisualTab = r:Tab({Title = "Visuals", Icon = "scan"})
+bV = game:GetService("RunService")
+Players = game:GetService("Players")
+Workspace = game:GetService("Workspace")
+Lighting = game:GetService("Lighting")
+aT = Players.LocalPlayer
+ESPSettings = {
+    ShowName = false,
+    ShowDistance = false,
+    Highlight = false,
+    ShowFuel = false,
+    ShowGears = false,
+    ShowFood = false,
+    ShowWeapons = false,
+    ShowOthers = false,
+    SelectedFuel = {},
+    SelectedGears = {},
+    SelectedFood = {},
+    SelectedWeapons = {},
+    SelectedOthers = {}
+}
+ay = {"Corpse", "Sapling", "Alien", "Log", "Chair", "Coal", "Fuel Canister", "Oil Barrel", "Biofuel"}
+GearsList = {
+    "Bolt",
+    "Tyre",
+    "Sheet Metal",
+    "Old Radio",
+    "Broken Fan",
+    "Broken Microwave",
+    "Washing Machine",
+    "Old Car Engine",
+    "UFO Scrap",
+    "UFO Component",
+    "UFO Junk",
+    "Cultist Gem",
+    "Gem of the Forest"
+}
+aF = {
+    "Carrot",
+    "Berry",
+    "Morsel",
+    "Steak",
+    "Ribs",
+    "Cooked Morsel",
+    "Cooked Steak",
+    "Cooked Ribs",
+    "Bandage",
+    "Medkit",
+    "Chili"
+}
+aL = {
+    "Morning star",
+    "Laser Sword",
+    "Raygun",
+    "Chainsaw",
+    "Strong Axe",
+    "Spear",
+    "Good Axe",
+    "Revolver",
+    "Rifle",
+    "Tactical Shotgun",
+    "Revolver Ammo",
+    "Rifle Ammo",
+    "Alien Armour",
+    "Leather Body",
+    "Iron Body",
+    "Thorn Body",
+    "Riot Shield"
+}
+aQ = {
+    "Sack",
+    "Seed Box",
+    "Chainsaw",
+    "Old Flashlight",
+    "Strong Flastlight",
+    "Bunny Foot",
+    "Wolf Pelt",
+    "Bear Pelt",
+    "Alpha Wolf Pet",
+    "Artic Fox Pelt",
+    "Polar Bear Pelt",
+    "Mammoth Tusk",
+    "Flowers",
+    "Coin Stack"
+}
+ESPObjects = {}
+function destroyESP(ap)
+    entry = ESPObjects[ap]
+    if not entry then
+        return
+    end
+    if entry.Gui and entry.Gui.Parent then
+        pcall(
+            function()
+                entry.Gui:Destroy()
+            end
+        )
+    end
+    if entry.Highlight and entry.Highlight.Parent then
+        pcall(
+            function()
+                entry.Highlight:Destroy()
+            end
+        )
+    end
+    ESPObjects[ap] = nil
+end
+function findRootPart(ap)
+    if not ap then
+        return nil
+    end
+    if ap:IsA("BasePart") then
+        return ap
+    end
+    if ap:IsA("Model") then
+        if ap.PrimaryPart and ap.PrimaryPart:IsA("BasePart") then
+            return ap.PrimaryPart
+        end
+        bp = ap:FindFirstChildWhichIsA("BasePart")
+        if bp then
+            return bp
+        end
+    end
+    for a2, cO in pairs(ap:GetDescendants()) do
+        if cO:IsA("BasePart") then
+            return cO
+        end
+    end
+    return nil
+end
+function createESP(ap)
+    if ESPObjects[ap] then
+        return
+    end
+    root = findRootPart(ap)
+    if not root then
+        return
+    end
+    gui = Instance.new("BillboardGui")
+    gui.Name = "ItemESP"
+    gui.Size = UDim2.new(0, 80, 0, 16)
+    gui.Adornee = root
+    gui.AlwaysOnTop = true
+    gui.StudsOffset = Vector3.new(0, 1.5, 0)
+    txt = Instance.new("TextLabel")
+    txt.Size = UDim2.new(1, 0, 1, 0)
+    txt.BackgroundTransparency = 1
+    txt.TextColor3 = Color3.fromRGB(255, 255, 255)
+    txt.TextStrokeTransparency = 0
+    txt.TextScaled = true
+    txt.Font = Enum.Font.Gotham
+    txt.Text = ""
+    txt.Parent = gui
+    gui.Parent = Workspace
+    hl = Instance.new("Highlight")
+    hl.FillTransparency = 0.5
+    hl.OutlineTransparency = 0
+    hl.Adornee = root
+    hl.Enabled = false
+    hl.Parent = Workspace
+    ESPObjects[ap] = {Gui = gui, Label = txt, Highlight = hl, Root = root}
+end
+function itemMatchesFilter(ap, type)
+    list = {}
+    if type == "Fuel" then
+        list = ESPSettings.SelectedFuel
+    end
+    if type == "Gears" then
+        list = ESPSettings.SelectedGears
+    end
+    if type == "Food" then
+        list = ESPSettings.SelectedFood
+    end
+    if type == "Weapons" then
+        list = ESPSettings.SelectedWeapons
+    end
+    if type == "Others" then
+        list = ESPSettings.SelectedOthers
+    end
+    if not list or #list == 0 then
+        return false
+    end
+    for a2, cO in pairs(list) do
+        if cO == "All" or ap.Name == cO then
+            return true
+        end
+    end
+    return false
+end
+if MainConn then
+    pcall(
+        function()
+            MainConn:Disconnect()
+        end
+    )
+    MainConn = nil
+end
+MainConn =
+    bV.Heartbeat:Connect(
+    function()
+        if not Workspace:FindFirstChild("Items") then
+            for e7, a2 in pairs(ESPObjects) do
+                destroyESP(e7)
+            end
+            return
+        end
+        children = Workspace.Items:GetChildren()
+        seen = {}
+        for a2, ap in pairs(children) do
+            if ap and ap.Parent then
+                show = false
+                if ESPSettings.ShowFuel and itemMatchesFilter(ap, "Fuel") then
+                    show = true
+                end
+                if ESPSettings.ShowGears and itemMatchesFilter(ap, "Gears") then
+                    show = true
+                end
+                if ESPSettings.ShowFood and itemMatchesFilter(ap, "Food") then
+                    show = true
+                end
+                if ESPSettings.ShowWeapons and itemMatchesFilter(ap, "Weapons") then
+                    show = true
+                end
+                if ESPSettings.ShowOthers and itemMatchesFilter(ap, "Others") then
+                    show = true
+                end
+                if show then
+                    if not ESPObjects[ap] then
+                        createESP(ap)
+                    end
+                    entry = ESPObjects[ap]
+                    if entry and (not entry.Root or not entry.Root.Parent) then
+                        destroyESP(ap)
+                        createESP(ap)
+                        entry = ESPObjects[ap]
+                    end
+                    if entry and entry.Gui and entry.Label then
+                        entry.Gui.Enabled = true
+                        nameText = ESPSettings.ShowName and ap.Name or ""
+                        distText = ""
+                        if ESPSettings.ShowDistance then
+                            char = aT and aT.Character
+                            primary = char and char.PrimaryPart
+                            if primary and entry.Root and entry.Root.Position then
+                                dist = (primary.Position - entry.Root.Position).Magnitude
+                                distText = (nameText ~= "" and " | " or "") .. string.format("%.0f m", dist)
+                            end
+                        end
+                        entry.Label.Text = nameText .. distText
+                        if entry.Highlight then
+                            entry.Highlight.Enabled = ESPSettings.Highlight
+                        end
+                    end
+                    seen[ap] = true
+                else
+                    if ESPObjects[ap] then
+                        destroyESP(ap)
+                    end
+                end
+            end
+        end
+        for e7, a2 in pairs(ESPObjects) do
+            if not seen[e7] then
+                destroyESP(e7)
+            end
+        end
+    end
+)
+ad = VisualTab:Section({Title = "Settings", Icon = "settings"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "ESP Name & Distance",
+        Desc = "Toggle showing item names and distance",
+        Icon = "bird",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowName,
+        Callback = function(U)
+            ESPSettings.ShowName = U
+        end
+    }
+)
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "ESP Highlight",
+        Desc = "Toggle highlighting items",
+        Icon = "star",
+        Type = "Checkbox",
+        Value = ESPSettings.Highlight,
+        Callback = function(U)
+            ESPSettings.Highlight = U
+        end
+    }
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Esp fuel", Icon = "fuel"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Fuel ESP",
+        Desc = "ESP for fuel/items",
+        Icon = "flame",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowFuel,
+        Callback = function(U)
+            ESPSettings.ShowFuel = U
+        end
+    }
+)
+VisualTab:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Fuel Types",
+        Desc = "Pick fuel/item types to ESP",
+        Values = ay,
+        Value = ESPSettings.SelectedFuel,
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e8)
+            ESPSettings.SelectedFuel = e8
+        end
+    }
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Esp gears", Icon = "cog"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Gears ESP",
+        Desc = "ESP for gears/items",
+        Icon = "flame",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowGears,
+        Callback = function(U)
+            ESPSettings.ShowGears = U
+        end
+    }
+)
+VisualTab:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Gears Types",
+        Desc = "Pick gears/item types to ESP",
+        Values = GearsList,
+        Value = ESPSettings.SelectedGears,
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e8)
+            ESPSettings.SelectedGears = e8
+        end
+    }
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Esp food", Icon = "apple"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Food ESP",
+        Desc = "ESP for food/items",
+        Icon = "flame",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowFood,
+        Callback = function(U)
+            ESPSettings.ShowFood = U
+        end
+    }
+)
+VisualTab:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Food Types",
+        Desc = "Pick food/item types to ESP",
+        Values = aF,
+        Value = ESPSettings.SelectedFood,
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e8)
+            ESPSettings.SelectedFood = e8
+        end
+    }
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Esp Weapons", Icon = "swords"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Weapons ESP",
+        Desc = "ESP for weapons/items",
+        Icon = "flame",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowWeapons,
+        Callback = function(U)
+            ESPSettings.ShowWeapons = U
+        end
+    }
+)
+VisualTab:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Weapons Types",
+        Desc = "Pick weapon types to ESP",
+        Values = aL,
+        Value = ESPSettings.SelectedWeapons,
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e8)
+            ESPSettings.SelectedWeapons = e8
+        end
+    }
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Esp Others", Icon = "badge-question-mark"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Others ESP",
+        Desc = "Toggle ESP for other items",
+        Icon = "flame",
+        Type = "Checkbox",
+        Value = ESPSettings.ShowOthers,
+        Callback = function(U)
+            ESPSettings.ShowOthers = U
+        end
+    }
+)
+VisualTab:Dropdown(
+    {
+        Flag = "AutoTab",
+        Title = "Select Others Types",
+        Desc = "Pick other item types to ESP",
+        Values = aQ,
+        Value = ESPSettings.SelectedOthers,
+        Multi = true,
+        AllowNone = true,
+        Callback = function(e8)
+            ESPSettings.SelectedOthers = e8
+        end
+    }
+)
+espFolder = Workspace:FindFirstChild("TreeHPESP") or Instance.new("Folder", Workspace)
+espFolder.Name = "TreeHPESP"
+espMap = espMap or {}
+function removeESP(dI)
+    local dQ = espMap[dI]
+    if dQ then
+        pcall(
+            function()
+                if dQ.bb and dQ.bb.Parent then
+                    dQ.bb:Destroy()
+                end
+            end
+        )
+        espMap[dI] = nil
+    end
+end
+function removeAllESP()
+    for dI, a2 in pairs(espMap) do
+        removeESP(dI)
+    end
+end
+function updateESP(dI)
+    if not d6.ShowHP then
+        return removeESP(dI)
+    end
+    if not dI or not dI.Parent then
+        return removeESP(dI)
+    end
+    local root = dI.PrimaryPart or dI:FindFirstChildWhichIsA("BasePart")
+    if not root then
+        return removeESP(dI)
+    end
+    local dQ = espMap[dI]
+    if not dQ then
+        local dV = Instance.new("BillboardGui")
+        dV.Name = "AutoCut_HP"
+        dV.Adornee = root
+        dV.Size = UDim2.new(0, 120, 0, 22)
+        dV.StudsOffset = Vector3.new(0, 2.2, 0)
+        dV.AlwaysOnTop = true
+        dV.Parent = espFolder
+        local dW = Instance.new("TextLabel")
+        dW.Size = UDim2.fromScale(1, 1)
+        dW.BackgroundTransparency = 1
+        dW.Font = Enum.Font.GothamBold
+        dW.TextScaled = true
+        dW.TextColor3 = Color3.new(1, 1, 1)
+        dW.Parent = dV
+        espMap[dI] = {bb = dV, lbl = dW}
+        dQ = espMap[dI]
+    end
+    local de = dI:GetAttribute("Health")
+    dQ.lbl.Text = (dI.Name or "Tree") .. " | HP: " .. (de and math.floor(tonumber(de) or de) or "N/A")
+    dQ.bb.Enabled = d6.ShowHP
+end
+game:GetService("RunService").RenderStepped:Connect(
+    function()
+        if not d6.ShowHP then
+            return
+        end
+        local db, dc = Workspace:FindFirstChild("Map") or Workspace:FindFirstChild("map")
+        if db then
+            db = db:FindFirstChild("Foliage") or db:FindFirstChild("foliage")
+        end
+        if dc then
+            dc = dc:FindFirstChild("Landmarks") or dc:FindFirstChild("landmarks")
+        end
+        local dX = {}
+        if db then
+            for a2, l in ipairs(db:GetChildren()) do
+                if l:GetAttribute("Health") then
+                    table.insert(dX, l)
+                end
+            end
+        end
+        if dc then
+            for a2, l in ipairs(dc:GetChildren()) do
+                if l:GetAttribute("Health") then
+                    table.insert(dX, l)
+                end
+            end
+        end
+        for a2, l in ipairs(dX) do
+            updateESP(l)
+        end
+    end
+)
+Workspace.DescendantRemoving:Connect(
+    function(dY)
+        if espMap[dY] then
+            removeESP(dY)
+        end
+    end
+)
+VisualTab:Divider()
+ad = VisualTab:Section({Title = "Performance", Icon = "circle-alert"})
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Remove Fog",
+        Desc = "Toggle to remove all fog",
+        Icon = "eye",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            if U then
+                Lighting.FogEnd = 100000
+                Lighting.FogStart = 0
+            else
+                Lighting.FogEnd = 1000
+                Lighting.FogStart = 0
+            end
+        end
+    }
+)
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Lower Graphics (Ultra)",
+        Desc = "Toggle maximum performance mode (might affect your gameplay/scripts!)",
+        Icon = "gear",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            if U then
+                Lighting.GlobalShadows = false
+                Lighting.QualityLevel = Enum.QualityLevel.Level1
+                Lighting.FogEnd = 300
+                Lighting.FogStart = 0
+                Lighting.Brightness = 0.5
+                Lighting.ClockTime = 14
+            else
+                Lighting.GlobalShadows = true
+                Lighting.QualityLevel = Enum.QualityLevel.Level21
+                Lighting.FogEnd = 1000
+                Lighting.FogStart = 0
+                Lighting.Brightness = 2
+            end
+            for a2, e9 in pairs(Lighting:GetChildren()) do
+                if
+                    e9:IsA("BloomEffect") or e9:IsA("BlurEffect") or e9:IsA("ColorCorrectionEffect") or
+                        e9:IsA("SunRaysEffect") or
+                        e9:IsA("DepthOfFieldEffect")
+                 then
+                    e9.Enabled = not U
+                end
+            end
+            for a2, e7 in pairs(Workspace:GetDescendants()) do
+                if e7:IsA("ParticleEmitter") or e7:IsA("Trail") then
+                    e7.Enabled = not U
+                    if U then
+                        e7.Rate = 0
+                        e7.Lifetime = NumberRange.new(0)
+                    end
+                end
+            end
+            for a2, e7 in pairs(Workspace:GetDescendants()) do
+                if
+                    e7:IsA("MeshPart") or e7:IsA("UnionOperation") or e7:IsA("Part") or e7:IsA("WedgePart") or
+                        e7:IsA("CornerWedgePart")
+                 then
+                    if U then
+                        e7.Material = Enum.Material.Plastic
+                        e7.Reflectance = 0
+                        e7.Transparency = math.min(e7.Transparency, 0.1)
+                        e7.CastShadow = false
+                    else
+                        e7.Material = Enum.Material.SmoothPlastic
+                        e7.Reflectance = 0
+                        e7.Transparency = 0
+                        e7.CastShadow = true
+                    end
+                end
+            end
+            if ESPObjects then
+                for ap, entry in pairs(ESPObjects) do
+                    if entry.Highlight then
+                        entry.Highlight.Enabled = ESPSettings.Highlight and not U
+                        entry.Highlight.FillTransparency = U and 0.95 or 0.5
+                    end
+                    if entry.Label then
+                        entry.Label.TextScaled = not U
+                        entry.Label.TextStrokeTransparency = U and 1 or 0
+                    end
+                end
+            end
+            if U then
+                for a2, e7 in pairs(Workspace:GetDescendants()) do
+                    if e7:IsA("BasePart") and (e7.Position - aT.Character.PrimaryPart.Position).Magnitude > 500 then
+                        e7.Transparency = 1
+                    end
+                end
+            else
+                for a2, e7 in pairs(Workspace:GetDescendants()) do
+                    if e7:IsA("BasePart") then
+                        e7.Transparency = 0
+                    end
+                end
+            end
+        end
+    }
+)
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Full Bright",
+        Desc = "I Can See Everything!",
+        Icon = "sun",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            if U then
+                Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+                Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+            else
+                Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+                Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+            end
+        end
+    }
+)
+VisualTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Black Screen",
+        Desc = "Toggle black screen (if you're eyes are burning)",
+        Icon = "moon",
+        Type = "Checkbox",
+        Value = false,
+        Callback = function(U)
+            if U then
+                if not Players.LocalPlayer.PlayerGui:FindFirstChild("BlackScreen") then
+                    overlay = Instance.new("ScreenGui")
+                    overlay.Name = "BlackScreen"
+                    overlay.ResetOnSpawn = false
+                    overlay.IgnoreGuiInset = true
+                    overlay.Parent = Players.LocalPlayer.PlayerGui
+                    frame = Instance.new("Frame")
+                    frame.Size = UDim2.fromScale(1, 1)
+                    frame.Position = UDim2.new(0, 0, 0, 0)
+                    frame.BackgroundColor3 = Color3.new(0, 0, 0)
+                    frame.BackgroundTransparency = 0.1
+                    frame.ZIndex = 999
+                    frame.Parent = overlay
+                end
+            else
+                overlay = Players.LocalPlayer.PlayerGui:FindFirstChild("BlackScreen")
+                if overlay then
+                    overlay:Destroy()
+                end
+            end
+        end
+    }
+)
+VisualTab:Button(
+    {
+        Flag = "AutoTab",
+        Title = "Restore Graphics",
+        Desc = "Restores default graphics settings",
+        Icon = "refresh",
+        Callback = function()
+            Lighting.FogEnd = 1000
+            Lighting.FogStart = 0
+            Lighting.GlobalShadows = true
+            Lighting.QualityLevel = Enum.QualityLevel.Level21
+            Lighting.ReflectionMode = Enum.ReflectionMode.Default
+            Workspace.Terrain.WaterReflectance = 1
+            Workspace.Terrain.WaterWaveSize = 1
+            Lighting.Ambient = Color3.fromRGB(128, 128, 128)
+            Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+            overlay = Players.LocalPlayer.PlayerGui:FindFirstChild("BlackScreen")
+            if overlay then
+                overlay:Destroy()
+            end
+        end
+    }
+)
+LocalPlayerTab = r:Tab({Title = "LocalPlayer", Icon = "user"})
+ad = LocalPlayerTab:Section({Title = "Map Loader", Icon = "map"})
+MAPLOADER_ACTIVE = false
+LOAD_DELAY = 0.05
+Players = game:GetService("Players")
+Workspace = game:GetService("Workspace")
+function NOTIFY(c2, ea, c3)
+    if b then
+        b:Notify({Title = c2, Content = ea, Duration = c3 or 3, Icon = "rbxassetid://84501312005643"})
+    else
+        warn("[Map loader] " .. c2 .. ": " .. ea)
+    end
+end
+function MAPLOADER_GrassScan()
+    if MAPLOADER_ACTIVE then
+        return
+    end
+    MAPLOADER_ACTIVE = true
+    d5 = Players.LocalPlayer
+    if not d5 then
+        return
+    end
+    char = d5.Character or d5.CharacterAdded:Wait()
+    hrp = char:WaitForChild("HumanoidRootPart")
+    grassFolder = Workspace:FindFirstChild("Map") and Workspace.Map:FindFirstChild("Ground")
+    if not grassFolder then
+        NOTIFY("GrassLoader", "No Map.Ground folder found!", 3)
+        MAPLOADER_ACTIVE = false
+        return
+    end
+    grassParts = {}
+    for k, cO in pairs(grassFolder:GetChildren()) do
+        if cO:IsA("BasePart") then
+            table.insert(grassParts, cO)
+        end
+    end
+    if #grassParts == 0 then
+        NOTIFY("GrassLoader", "No grass parts found!", 3)
+        MAPLOADER_ACTIVE = false
+        return
+    end
+    NOTIFY("MapLoader", "Starting teleport (Delay: " .. LOAD_DELAY .. "s)", 2)
+    for k = 1, #grassParts do
+        if not MAPLOADER_ACTIVE then
+            break
+        end
+        part = grassParts[k]
+        if part and part.Parent then
+            hrp.CFrame = CFrame.new(part.Position + Vector3.new(0, 3, 0))
+        end
+        task.wait(LOAD_DELAY)
+    end
+    MAPLOADER_ACTIVE = false
+    NOTIFY("Map Loader", "Finished teleporting!", 3)
+end
+function MAPLOADER_Stop()
+    MAPLOADER_ACTIVE = false
+    NOTIFY("Map Loader", "Stopped!", 2)
+end
+if LocalPlayerTab then
+    LocalPlayerTab:Toggle(
+        {Flag = "AutoTab", Title = "Map Loader", Desc = "Force load map", Value = false, Callback = function(cO)
+                if cO then
+                    task.spawn(MAPLOADER_GrassScan)
+                else
+                    MAPLOADER_Stop()
+                end
+            end}
+    )
+    LocalPlayerTab:Slider(
+        {
+            Flag = "AutoTab",
+            Title = "Teleport Speed",
+            Desc = "Adjust teleport delay (0.01 fastest, 1 slowest)",
+            Value = {Min = 0.01, Max = 1, Default = LOAD_DELAY},
+            Step = 0.01,
+            Callback = function(V)
+                LOAD_DELAY = V
+            end
+        }
+    )
+else
+    NOTIFY("MapLoader", "LocalPlayerTab not found; use MAPLOADER_GrassScan() / MAPLOADER_Stop() manually.", 3)
+end
+Players = game:GetService("Players")
+Workspace = game:GetService("Workspace")
+ReplicatedStorage = game:GetService("ReplicatedStorage")
+function TPToCamp()
+    local d5 = Players.LocalPlayer
+    if not d5 then
+        return
+    end
+    local char = d5.Character or d5.CharacterAdded:Wait()
+    local hrp = char:WaitForChild("HumanoidRootPart")
+    local ar = Vector3.new(4.95910645e-05, 9.5, -7.62939453e-06)
+    hrp.CFrame = CFrame.new(ar)
+end
+if LocalPlayerTab then
+    LocalPlayerTab:Button(
+        {Title = "TP to Campfire", Desc = "Teleport to campfire", Locked = false, Callback = function()
+                TPToCamp()
+            end}
+    )
+end
+LocalPlayerTab:Divider()
+if not NOTIFY then
+    function NOTIFY(c2, ea, c3)
+        if b then
+            b:Notify({Title = c2, Content = ea, Duration = c3 or 3, Icon = "rbxassetid://84501312005643"})
+        else
+            warn("[" .. tostring(c2) .. "] " .. tostring(ea))
+        end
+    end
+end
+if
+    Players and Players.LocalPlayer and Players.LocalPlayer:FindFirstChild("PlayerGui") and
+        Players.LocalPlayer.PlayerGui:FindFirstChild("RyZenHubAFK")
+ then
+    Players.LocalPlayer.PlayerGui.RyZenHubAFK:Destroy()
+end
+ANTI_AFK_ENABLED = false
+ANTI_AFK_TIME = 0
+AFK_GUI = nil
+AFK_Frame = nil
+AFK_Timer = nil
+AFK_CopyBtn = nil
+AFK_Close = nil
+AFK_MinBtn = nil
+AFK_DRAGGING = false
+AFK_DRAG_INPUT = nil
+AFK_DRAG_OFFSET_X = 0
+AFK_DRAG_OFFSET_Y = 0
+AFK_CONN_INPUT_BEGAN = AFK_CONN_INPUT_BEGAN
+AFK_CONN_INPUT_CHANGED = AFK_CONN_INPUT_CHANGED
+AFK_CONN_INPUT_ENDED = AFK_CONN_INPUT_ENDED
+ANTI_AFK_IDLED_CONN = ANTI_AFK_IDLED_CONN
+ANTI_AFK_HEART_CONN = ANTI_AFK_HEART_CONN
+AFK_MINIMIZED = false
+Players = game:GetService("Players")
+UserInputService = game:GetService("UserInputService")
+bV = game:GetService("RunService")
+VirtualUser = game:GetService("VirtualUser")
+Workspace = game:GetService("Workspace")
+function FORMAT_TIME(eb)
+    h = math.floor(eb / 3600)
+    m = math.floor(eb % 3600 / 60)
+    s = eb % 60
+    return string.format("%02d:%02d:%02d", h, m, s)
+end
+function CREATE_AFK_GUI()
+    if AFK_GUI and AFK_GUI.Parent then
+        return
+    end
+    if Players.LocalPlayer.PlayerGui:FindFirstChild("RyZenHubAFK") then
+        Players.LocalPlayer.PlayerGui.RyZenHubAFK:Destroy()
+    end
+    AFK_GUI = Instance.new("ScreenGui")
+    AFK_GUI.Name = "RyZenHubAFK"
+    AFK_GUI.ResetOnSpawn = false
+    AFK_GUI.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+    AFK_Frame = Instance.new("Frame")
+    AFK_Frame.Name = "AFKFrame"
+    AFK_Frame.Size = UDim2.new(0, 240, 0, 100)
+    AFK_Frame.Position = UDim2.new(0.7, 0, 0.08, 0)
+    AFK_Frame.BackgroundTransparency = 0
+    AFK_Frame.BorderSizePixel = 0
+    AFK_Frame.Parent = AFK_GUI
+    AFK_Gradient = Instance.new("UIGradient")
+    AFK_Gradient.Color =
+        ColorSequence.new {
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(10, 30, 70)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
+    }
+    AFK_Gradient.Rotation = 45
+    AFK_Gradient.Parent = AFK_Frame
+    AFK_Round = Instance.new("UICorner")
+    AFK_Round.CornerRadius = UDim.new(0, 10)
+    AFK_Round.Parent = AFK_Frame
+    AFK_Title = Instance.new("TextLabel")
+    AFK_Title.Name = "Title"
+    AFK_Title.Size = UDim2.new(1, -80, 0, 24)
+    AFK_Title.Position = UDim2.new(0, 10, 0, 6)
+    AFK_Title.BackgroundTransparency = 1
+    AFK_Title.Text = "RyZen Hub AFK"
+    AFK_Title.TextColor3 = Color3.fromRGB(200, 230, 255)
+    AFK_Title.Font = Enum.Font.SourceSansBold
+    AFK_Title.TextSize = 16
+    AFK_Title.TextXAlignment = Enum.TextXAlignment.Left
+    AFK_Title.Parent = AFK_Frame
+    AFK_Timer = Instance.new("TextLabel")
+    AFK_Timer.Name = "Timer"
+    AFK_Timer.Size = UDim2.new(0, 140, 0, 36)
+    AFK_Timer.Position = UDim2.new(0, 50, 0, 32)
+    AFK_Timer.BackgroundTransparency = 1
+    AFK_Timer.Text = FORMAT_TIME(ANTI_AFK_TIME)
+    AFK_Timer.TextColor3 = Color3.fromRGB(230, 250, 255)
+    AFK_Timer.Font = Enum.Font.SourceSansBold
+    AFK_Timer.TextSize = 22
+    AFK_Timer.TextXAlignment = Enum.TextXAlignment.Center
+    AFK_Timer.Parent = AFK_Frame
+    AFK_CopyBtn = Instance.new("TextButton")
+    AFK_CopyBtn.Name = "CopyButton"
+    AFK_CopyBtn.Size = UDim2.new(0, 90, 0, 26)
+    AFK_CopyBtn.Position = UDim2.new(1, -10, 1, -10)
+    AFK_CopyBtn.AnchorPoint = Vector2.new(1, 1)
+    AFK_CopyBtn.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+    AFK_CopyBtn.BorderSizePixel = 0
+    AFK_CopyBtn.Text = "Copy Time"
+    AFK_CopyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    AFK_CopyBtn.Font = Enum.Font.SourceSansBold
+    AFK_CopyBtn.TextSize = 14
+    AFK_CopyBtn.Parent = AFK_Frame
+    AFK_MinBtn = Instance.new("TextButton")
+    AFK_MinBtn.Name = "MinBtn"
+    AFK_MinBtn.Size = UDim2.new(0, 26, 0, 22)
+    AFK_MinBtn.Position = UDim2.new(1, -56, 0, 6)
+    AFK_MinBtn.BackgroundTransparency = 0.5
+    AFK_MinBtn.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    AFK_MinBtn.Text = "_"
+    AFK_MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    AFK_MinBtn.Font = Enum.Font.SourceSansBold
+    AFK_MinBtn.TextSize = 18
+    AFK_MinBtn.Parent = AFK_Frame
+    AFK_Close = Instance.new("TextButton")
+    AFK_Close.Name = "CloseBtn"
+    AFK_Close.Size = UDim2.new(0, 22, 0, 22)
+    AFK_Close.Position = UDim2.new(1, -28, 0, 6)
+    AFK_Close.BackgroundTransparency = 0.5
+    AFK_Close.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    AFK_Close.Text = "X"
+    AFK_Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+    AFK_Close.Font = Enum.Font.SourceSansBold
+    AFK_Close.TextSize = 14
+    AFK_Close.Parent = AFK_Frame
+    AFK_CopyBtn.MouseButton1Click:Connect(
+        function()
+            pcall(
+                function()
+                    setclipboard(FORMAT_TIME(ANTI_AFK_TIME))
+                    NOTIFY("Anti-AFK", "Copied " .. FORMAT_TIME(ANTI_AFK_TIME) .. " to clipboard!", 2)
+                end
+            )
+        end
+    )
+    AFK_Close.MouseButton1Click:Connect(
+        function()
+            ANTI_AFK_ENABLED = false
+            DESTROY_AFK_GUI()
+            NOTIFY("Anti-AFK", "Disabled and UI removed", 2)
+        end
+    )
+    AFK_MinBtn.MouseButton1Click:Connect(
+        function()
+            AFK_MINIMIZED = not AFK_MINIMIZED
+            if AFK_MINIMIZED then
+                AFK_Frame.Size = UDim2.new(0, 160, 0, 34)
+                AFK_Timer.Visible = false
+                AFK_CopyBtn.Visible = false
+                AFK_Title.Text = "RyZen Hub AFK (min)"
+            else
+                AFK_Frame.Size = UDim2.new(0, 240, 0, 100)
+                AFK_Timer.Visible = true
+                AFK_CopyBtn.Visible = true
+                AFK_Title.Text = "RyZen Hub AFK"
+            end
+        end
+    )
+    AFK_CONN_INPUT_BEGAN =
+        AFK_Frame.InputBegan:Connect(
+        function(ai)
+            if ai.UserInputType == Enum.UserInputType.MouseButton1 or ai.UserInputType == Enum.UserInputType.Touch then
+                AFK_DRAGGING = true
+                AFK_DRAG_INPUT = ai
+                if ai.UserInputType == Enum.UserInputType.MouseButton1 then
+                    pos = UserInputService:GetMouseLocation()
+                else
+                    pos = ai.Position
+                end
+                AFK_DRAG_OFFSET_X = pos.X - AFK_Frame.AbsolutePosition.X
+                AFK_DRAG_OFFSET_Y = pos.Y - AFK_Frame.AbsolutePosition.Y
+            end
+        end
+    )
+    AFK_CONN_INPUT_CHANGED =
+        UserInputService.InputChanged:Connect(
+        function(ai)
+            if AFK_DRAGGING and AFK_DRAG_INPUT then
+                if
+                    ai == AFK_DRAG_INPUT or ai.UserInputType == Enum.UserInputType.MouseMovement or
+                        ai.UserInputType == Enum.UserInputType.Touch
+                 then
+                    if
+                        ai.UserInputType == Enum.UserInputType.MouseMovement or
+                            ai.UserInputType == Enum.UserInputType.MouseButton1
+                     then
+                        pos = UserInputService:GetMouseLocation()
+                    else
+                        pos = ai.Position
+                    end
+                    newX = pos.X - AFK_DRAG_OFFSET_X
+                    newY = pos.Y - AFK_DRAG_OFFSET_Y
+                    cam = Workspace.CurrentCamera
+                    if cam then
+                        vs = cam.ViewportSize
+                        if newX < 0 then
+                            newX = 0
+                        end
+                        if newY < 0 then
+                            newY = 0
+                        end
+                        maxX = vs.X - AFK_Frame.AbsoluteSize.X
+                        maxY = vs.Y - AFK_Frame.AbsoluteSize.Y
+                        if newX > maxX then
+                            newX = maxX
+                        end
+                        if newY > maxY then
+                            newY = maxY
+                        end
+                    end
+                    AFK_Frame.Position = UDim2.new(0, newX, 0, newY)
+                end
+            end
+        end
+    )
+    AFK_CONN_INPUT_ENDED =
+        AFK_Frame.InputEnded:Connect(
+        function(ai)
+            if AFK_DRAG_INPUT and ai == AFK_DRAG_INPUT then
+                AFK_DRAGGING = false
+                AFK_DRAG_INPUT = nil
+            end
+        end
+    )
+    AFK_GUI.Enabled = true
+end
+function DESTROY_AFK_GUI()
+    if AFK_CONN_INPUT_CHANGED then
+        AFK_CONN_INPUT_CHANGED:Disconnect()
+        AFK_CONN_INPUT_CHANGED = nil
+    end
+    if AFK_CONN_INPUT_ENDED then
+        AFK_CONN_INPUT_ENDED:Disconnect()
+        AFK_CONN_INPUT_ENDED = nil
+    end
+    if AFK_CONN_INPUT_BEGAN then
+        AFK_CONN_INPUT_BEGAN:Disconnect()
+        AFK_CONN_INPUT_BEGAN = nil
+    end
+    if AFK_GUI and AFK_GUI.Parent then
+        AFK_GUI:Destroy()
+    end
+    AFK_GUI = nil
+    AFK_Frame = nil
+    AFK_Timer = nil
+    AFK_CopyBtn = nil
+    AFK_Close = nil
+    AFK_MinBtn = nil
+    AFK_DRAGGING = false
+    AFK_DRAG_INPUT = nil
+    if ANTI_AFK_HEART_CONN then
+        ANTI_AFK_HEART_CONN:Disconnect()
+        ANTI_AFK_HEART_CONN = nil
+    end
+end
+if not ANTI_AFK_IDLED_CONN then
+    ANTI_AFK_IDLED_CONN =
+        Players.LocalPlayer.Idled:Connect(
+        function()
+            if ANTI_AFK_ENABLED then
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton1(Vector2.new(0, 0))
+            end
+        end
+    )
+end
+function START_AFK_TIMER_LOOP()
+    if ANTI_AFK_HEART_CONN then
+        return
+    end
+    if AFK_Timer then
+        AFK_Timer.Text = FORMAT_TIME(ANTI_AFK_TIME)
+    end
+    accumulator = 0
+    ANTI_AFK_HEART_CONN =
+        bV.Heartbeat:Connect(
+        function(ec)
+            if not ANTI_AFK_ENABLED then
+                return
+            end
+            accumulator = accumulator + ec
+            while accumulator >= 1 do
+                accumulator = accumulator - 1
+                ANTI_AFK_TIME = ANTI_AFK_TIME + 1
+                if AFK_Timer then
+                    AFK_Timer.Text = FORMAT_TIME(ANTI_AFK_TIME)
+                end
+            end
+        end
+    )
+end
+function STOP_AFK_TIMER_LOOP()
+    if ANTI_AFK_HEART_CONN then
+        ANTI_AFK_HEART_CONN:Disconnect()
+        ANTI_AFK_HEART_CONN = nil
+    end
+end
+if LocalPlayerTab then
+    LocalPlayerTab:Toggle(
+        {
+            Flag = "AutoTab",
+            Title = "Anti-AFK",
+            Desc = "Avoid being kicked while afk",
+            Default = false,
+            Callback = function(U)
+                ANTI_AFK_ENABLED = U
+                if ANTI_AFK_ENABLED then
+                    ANTI_AFK_TIME = 0
+                    CREATE_AFK_GUI()
+                    START_AFK_TIMER_LOOP()
+                    NOTIFY("Anti-AFK", "Enabled", 2)
+                else
+                    ANTI_AFK_ENABLED = false
+                    STOP_AFK_TIMER_LOOP()
+                    DESTROY_AFK_GUI()
+                    NOTIFY("Anti-AFK", "Disabled and UI removed", 2)
+                end
+            end
+        }
+    )
+else
+    NOTIFY("Anti-AFK", "Tab not found — set ANTI_AFK_ENABLED = true to enable", 3)
+end
+if LocalPlayerTab then
+    LocalPlayerTab:Toggle(
+        {
+            Flag = "AutoTab",
+            Title = "Freeze Character",
+            Desc = "Freeze/unfreeze your character in place",
+            Default = false,
+            Callback = function(U)
+                d5 = game:GetService("Players").LocalPlayer
+                if not d5 then
+                    return
+                end
+                char = d5.Character or d5.CharacterAdded:Wait()
+                hrp = char:WaitForChild("HumanoidRootPart")
+                humanoid = char:FindFirstChildOfClass("Humanoid")
+                if U then
+                    hrp.Anchored = true
+                    if humanoid then
+                        humanoid.PlatformStand = true
+                    end
+                else
+                    hrp.Anchored = false
+                    if humanoid then
+                        humanoid.PlatformStand = false
+                    end
+                end
+            end
+        }
+    )
+end
+LocalPlayerTab:Divider()
+local Players = game:GetService("Players")
+local d5 = Players.LocalPlayer
+local humanoid
+local ed = 16
+local ee = false
+local function ef()
+    if ee and humanoid then
+        if humanoid.WalkSpeed ~= ed then
+            humanoid.WalkSpeed = ed
+        end
+    end
+end
+LocalPlayerTab:Toggle(
+    {Title = "Walk Speed", Default = false, Callback = function(U)
+            ee = U
+            if ee then
+                ef()
+            else
+                if humanoid then
+                    humanoid.WalkSpeed = 16
+                end
+            end
+        end}
+)
+LocalPlayerTab:Slider(
+    {
+        Title = "Walk Speed Value",
+        Desc = "Choose your walk speed",
+        Step = 1,
+        Value = {Min = 16, Max = 200, Default = 16},
+        Callback = function(V)
+            ed = V
+            ef()
+        end
+    }
+)
+d5.CharacterAdded:Connect(
+    function(char)
+        humanoid = char:WaitForChild("Humanoid")
+        humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(
+            function()
+                ef()
+            end
+        )
+        ef()
+    end
+)
+if d5.Character then
+    humanoid = d5.Character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(ef)
+        ef()
+    end
+end
+LocalPlayerTab:Space()
+LocalPlayerTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Infinite Jump",
+        Desc = "you can go to heaven with this!",
+        Default = false,
+        Callback = function(U)
+            INFINITE_JUMP = U
+        end
+    }
+)
+game:GetService("UserInputService").JumpRequest:Connect(
+    function()
+        if INFINITE_JUMP then
+            d5 = game:GetService("Players").LocalPlayer
+            if d5 and d5.Character then
+                humanoid = d5.Character:FindFirstChildOfClass("Humanoid")
+                if humanoid then
+                    humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                end
+            end
+        end
+    end
+)
+LocalPlayerTab:Space()
+LocalPlayerTab:Toggle(
+    {Flag = "AutoTab", Title = "No Clip", Desc = "Walk through walls", Default = false, Callback = function(U)
+            NOCLIP_ENABLED = U
+        end}
+)
+game:GetService("RunService").Stepped:Connect(
+    function()
+        if NOCLIP_ENABLED then
+            d5 = game:GetService("Players").LocalPlayer
+            if d5 and d5.Character then
+                for a2, part in pairs(d5.Character:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = false
+                    end
+                end
+            end
+        end
+    end
+)
+LocalPlayerTab:Space()
+Players = game:GetService("Players")
+bV = game:GetService("RunService")
+SPIN_ENABLED = SPIN_ENABLED or false
+SPIN_SPEED = SPIN_SPEED or 200
+SPIN_MULTIPLIER = SPIN_MULTIPLIER or 1
+d5 = Players.LocalPlayer
+hrp = nil
+hum = nil
+SPIN_BAV = SPIN_BAV or nil
+SPIN_PREV_AUTOROTATE = SPIN_PREV_AUTOROTATE or nil
+_SPIN_LAST_SPEED = _SPIN_LAST_SPEED or nil
+function SPIN_UPDATE_REFS()
+    if d5 and d5.Character then
+        hrp = d5.Character:FindFirstChild("HumanoidRootPart")
+        hum = d5.Character:FindFirstChildOfClass("Humanoid")
+    else
+        hrp = nil
+        hum = nil
+    end
+end
+SPIN_UPDATE_REFS()
+d5.CharacterAdded:Connect(
+    function()
+        task.wait(0.12)
+        SPIN_UPDATE_REFS()
+    end
+)
+function SPIN_CREATE_BAV()
+    if not hrp then
+        return
+    end
+    if SPIN_BAV and SPIN_BAV.Parent == hrp then
+        return
+    end
+    if SPIN_BAV then
+        pcall(
+            function()
+                SPIN_BAV:Destroy()
+            end
+        )
+        SPIN_BAV = nil
+    end
+    SPIN_BAV = Instance.new("BodyAngularVelocity")
+    SPIN_BAV.Name = "RyZen_Spin_BAV"
+    SPIN_BAV.MaxTorque = Vector3.new(0, 9e9, 0)
+    SPIN_BAV.AngularVelocity =
+        Vector3.new(0, math.rad(math.clamp((SPIN_SPEED or 200) * (SPIN_MULTIPLIER or 1), 0, 360000)), 0)
+    SPIN_BAV.Parent = hrp
+    _SPIN_LAST_SPEED = SPIN_SPEED
+end
+function SPIN_DESTROY_BAV()
+    if SPIN_BAV then
+        pcall(
+            function()
+                SPIN_BAV:Destroy()
+            end
+        )
+        SPIN_BAV = nil
+    end
+    _SPIN_LAST_SPEED = nil
+end
+LocalPlayerTab:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Spin",
+        Desc = "Enable character spinning",
+        Default = SPIN_ENABLED,
+        Callback = function(U)
+            SPIN_ENABLED = U
+        end
+    }
+)
+LocalPlayerTab:Slider(
+    {
+        Flag = "AutoTab",
+        Title = "Spin Speed",
+        Desc = "max to become a helicopter.",
+        Value = {Min = 10, Max = 2000, Default = SPIN_SPEED},
+        Step = 1,
+        Callback = function(V)
+            SPIN_SPEED = math.max(0, V)
+            if SPIN_BAV and SPIN_BAV.Parent then
+                SPIN_BAV.AngularVelocity =
+                    Vector3.new(0, math.rad(math.clamp(SPIN_SPEED * (SPIN_MULTIPLIER or 1), 0, 360000)), 0)
+                _SPIN_LAST_SPEED = SPIN_SPEED
+            end
+        end
+    }
+)
+bV.Heartbeat:Connect(
+    function()
+        if not hrp or not hum then
+            SPIN_UPDATE_REFS()
+        end
+        if SPIN_ENABLED then
+            if hum and hrp then
+                if SPIN_PREV_AUTOROTATE == nil then
+                    SPIN_PREV_AUTOROTATE = hum.AutoRotate
+                end
+                pcall(
+                    function()
+                        hum.AutoRotate = false
+                    end
+                )
+                if not SPIN_BAV or SPIN_BAV.Parent ~= hrp then
+                    SPIN_CREATE_BAV()
+                end
+                if SPIN_BAV and _SPIN_LAST_SPEED ~= SPIN_SPEED then
+                    SPIN_BAV.AngularVelocity =
+                        Vector3.new(0, math.rad(math.clamp(SPIN_SPEED * (SPIN_MULTIPLIER or 1), 0, 360000)), 0)
+                    _SPIN_LAST_SPEED = SPIN_SPEED
+                end
+            else
+                SPIN_DESTROY_BAV()
+            end
+        else
+            if hum and SPIN_PREV_AUTOROTATE ~= nil then
+                pcall(
+                    function()
+                        hum.AutoRotate = SPIN_PREV_AUTOROTATE
+                    end
+                )
+                SPIN_PREV_AUTOROTATE = nil
+            end
+            SPIN_DESTROY_BAV()
+        end
+    end
+)
+Players.LocalPlayer.CharacterAdded:Connect(
+    function(char)
+        task.wait(0.12)
+        SPIN_UPDATE_REFS()
+        if SPIN_ENABLED then
+            SPIN_CREATE_BAV()
+        else
+            SPIN_DESTROY_BAV()
+        end
+    end
+)
+LocalPlayerTab:Space()
+Players = game:GetService("Players")
+UserInputService = game:GetService("UserInputService")
+bV = game:GetService("RunService")
+Workspace = game:GetService("Workspace")
+if Players.LocalPlayer:FindFirstChild("PlayerGui") and Players.LocalPlayer.PlayerGui:FindFirstChild("RyZenFlyGUI") then
+    Players.LocalPlayer.PlayerGui.RyZenFlyGUI:Destroy()
+end
+FLY_GUI = Instance.new("ScreenGui")
+FLY_GUI.Name = "RyZenFlyGUI"
+FLY_GUI.ResetOnSpawn = false
+FLY_GUI.Enabled = false
+FLY_GUI.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
+FLY_Frame = Instance.new("Frame")
+FLY_Frame.Name = "FlyFrame"
+FLY_Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+FLY_Frame.BackgroundTransparency = 0.2
+FLY_Frame.BorderSizePixel = 0
+FLY_Frame.Position = UDim2.new(0.7, 0, 0.15, 0)
+FLY_Frame.Size = UDim2.new(0, 250, 0, 150)
+FLY_Frame.Parent = FLY_GUI
+FLY_ORIG_SIZE = FLY_Frame.Size
+FLY_Corner = Instance.new("UICorner")
+FLY_Corner.CornerRadius = UDim.new(0, 12)
+FLY_Corner.Parent = FLY_Frame
+FLY_Gradient = Instance.new("UIGradient")
+FLY_Gradient.Color =
+    ColorSequence.new {
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(10, 30, 70)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
+}
+FLY_Gradient.Rotation = 45
+FLY_Gradient.Parent = FLY_Frame
+FLY_Title = Instance.new("TextLabel")
+FLY_Title.Name = "Title"
+FLY_Title.Size = UDim2.new(1, -80, 0, 26)
+FLY_Title.Position = UDim2.new(0, 10, 0, 5)
+FLY_Title.BackgroundTransparency = 1
+FLY_Title.TextColor3 = Color3.fromRGB(200, 230, 255)
+FLY_Title.Font = Enum.Font.SourceSansBold
+FLY_Title.TextSize = 18
+FLY_Title.TextXAlignment = Enum.TextXAlignment.Left
+FLY_Title.Text = "RyZen Hub (fly)"
+FLY_Title.Parent = FLY_Frame
+FLY_SpeedLabel = Instance.new("TextLabel")
+FLY_SpeedLabel.Name = "SpeedLabel"
+FLY_SpeedLabel.Position = UDim2.new(0, 10, 0, 40)
+FLY_SpeedLabel.Size = UDim2.new(0, 120, 0, 26)
+FLY_SpeedLabel.BackgroundTransparency = 1
+FLY_SpeedLabel.Text = "Speed: 50"
+FLY_SpeedLabel.TextColor3 = Color3.fromRGB(220, 240, 255)
+FLY_SpeedLabel.Font = Enum.Font.SourceSansBold
+FLY_SpeedLabel.TextSize = 16
+FLY_SpeedLabel.Parent = FLY_Frame
+FLY_SpeedPlus = Instance.new("TextButton")
+FLY_SpeedPlus.Name = "SpeedPlus"
+FLY_SpeedPlus.Position = UDim2.new(0, 140, 0, 40)
+FLY_SpeedPlus.Size = UDim2.new(0, 40, 0, 26)
+FLY_SpeedPlus.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+FLY_SpeedPlus.BorderSizePixel = 0
+FLY_SpeedPlus.Text = "+"
+FLY_SpeedPlus.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_SpeedPlus.Font = Enum.Font.SourceSansBold
+FLY_SpeedPlus.TextSize = 18
+FLY_SpeedPlus.Parent = FLY_Frame
+FLY_SpeedMinus = Instance.new("TextButton")
+FLY_SpeedMinus.Name = "SpeedMinus"
+FLY_SpeedMinus.Position = UDim2.new(0, 190, 0, 40)
+FLY_SpeedMinus.Size = UDim2.new(0, 40, 0, 26)
+FLY_SpeedMinus.BackgroundColor3 = Color3.fromRGB(0, 140, 255)
+FLY_SpeedMinus.BorderSizePixel = 0
+FLY_SpeedMinus.Text = "-"
+FLY_SpeedMinus.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_SpeedMinus.Font = Enum.Font.SourceSansBold
+FLY_SpeedMinus.TextSize = 18
+FLY_SpeedMinus.Parent = FLY_Frame
+FLY_OnOff = Instance.new("TextButton")
+FLY_OnOff.Name = "FlyToggle"
+FLY_OnOff.Position = UDim2.new(0, 10, 0, 80)
+FLY_OnOff.Size = UDim2.new(0, 220, 0, 32)
+FLY_OnOff.BackgroundColor3 = Color3.fromRGB(0, 160, 80)
+FLY_OnOff.BorderSizePixel = 0
+FLY_OnOff.Text = "Fly: OFF"
+FLY_OnOff.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_OnOff.Font = Enum.Font.SourceSansBold
+FLY_OnOff.TextSize = 18
+FLY_OnOff.Parent = FLY_Frame
+FLY_Close = Instance.new("TextButton")
+FLY_Close.Name = "CloseBtn"
+FLY_Close.Size = UDim2.new(0, 24, 0, 24)
+FLY_Close.Position = UDim2.new(1, -28, 0, 6)
+FLY_Close.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+FLY_Close.BackgroundTransparency = 0.4
+FLY_Close.BorderSizePixel = 0
+FLY_Close.Text = "X"
+FLY_Close.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_Close.Font = Enum.Font.SourceSansBold
+FLY_Close.TextSize = 14
+FLY_Close.Parent = FLY_Frame
+FLY_Min = Instance.new("TextButton")
+FLY_Min.Name = "MinBtn"
+FLY_Min.Size = UDim2.new(0, 26, 0, 24)
+FLY_Min.Position = UDim2.new(1, -56, 0, 6)
+FLY_Min.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+FLY_Min.BackgroundTransparency = 0.4
+FLY_Min.BorderSizePixel = 0
+FLY_Min.Text = "_"
+FLY_Min.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_Min.Font = Enum.Font.SourceSansBold
+FLY_Min.TextSize = 20
+FLY_Min.Parent = FLY_Frame
+FLY_UpBtn = Instance.new("TextButton")
+FLY_UpBtn.Name = "UpBtn"
+FLY_UpBtn.Position = UDim2.new(0, 10, 0, 120)
+FLY_UpBtn.Size = UDim2.new(0, 100, 0, 26)
+FLY_UpBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
+FLY_UpBtn.Text = "UP"
+FLY_UpBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_UpBtn.Font = Enum.Font.SourceSansBold
+FLY_UpBtn.TextSize = 16
+FLY_UpBtn.Parent = FLY_Frame
+FLY_DownBtn = Instance.new("TextButton")
+FLY_DownBtn.Name = "DownBtn"
+FLY_DownBtn.Position = UDim2.new(0, 130, 0, 120)
+FLY_DownBtn.Size = UDim2.new(0, 100, 0, 26)
+FLY_DownBtn.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
+FLY_DownBtn.Text = "DOWN"
+FLY_DownBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+FLY_DownBtn.Font = Enum.Font.SourceSansBold
+FLY_DownBtn.TextSize = 16
+FLY_DownBtn.Parent = FLY_Frame
+FLY_SPEED = 50
+FLY_ENABLED = false
+FLY_MINIMIZED = false
+FLY_UP = false
+FLY_DOWN = false
+FLY_DEFAULT_WALKSPEED = 16
+FLY_VERT_BV = nil
+FLY_SpeedPlus.MouseButton1Click:Connect(
+    function()
+        FLY_SPEED = math.min(500, FLY_SPEED + 5)
+        FLY_SpeedLabel.Text = "Speed: " .. FLY_SPEED
+        if FLY_ENABLED and Players.LocalPlayer.Character then
+            Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = FLY_SPEED
+        end
+    end
+)
+FLY_SpeedMinus.MouseButton1Click:Connect(
+    function()
+        FLY_SPEED = math.max(1, FLY_SPEED - 5)
+        FLY_SpeedLabel.Text = "Speed: " .. FLY_SPEED
+        if FLY_ENABLED and Players.LocalPlayer.Character then
+            Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = FLY_SPEED
+        end
+    end
+)
+FLY_OnOff.MouseButton1Click:Connect(
+    function()
+        FLY_ENABLED = not FLY_ENABLED
+        if FLY_ENABLED then
+            FLY_OnOff.Text = "Fly: ON"
+            FLY_OnOff.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+        else
+            FLY_OnOff.Text = "Fly: OFF"
+            FLY_OnOff.BackgroundColor3 = Color3.fromRGB(0, 160, 80)
+        end
+    end
+)
+FLY_Close.MouseButton1Click:Connect(
+    function()
+        FLY_GUI.Enabled = false
+    end
+)
+FLY_Min.MouseButton1Click:Connect(
+    function()
+        FLY_MINIMIZED = not FLY_MINIMIZED
+        if FLY_MINIMIZED then
+            FLY_Frame.Size = UDim2.new(0, 160, 0, 34)
+            for a2, a3 in pairs(FLY_Frame:GetChildren()) do
+                if a3:IsA("GuiObject") and a3 ~= FLY_Min and a3 ~= FLY_Close and a3 ~= FLY_Title then
+                    a3.Visible = false
+                end
+            end
+            FLY_Title.Text = "RyZen Fly (min)"
+        else
+            FLY_Frame.Size = FLY_ORIG_SIZE
+            for a2, a3 in pairs(FLY_Frame:GetChildren()) do
+                if a3:IsA("GuiObject") and a3 ~= FLY_Min and a3 ~= FLY_Close then
+                    a3.Visible = true
+                end
+            end
+            FLY_Title.Text = "RyZen Fly"
+        end
+    end
+)
+FLY_UpBtn.MouseButton1Down:Connect(
+    function()
+        FLY_UP = true
+    end
+)
+FLY_UpBtn.MouseButton1Up:Connect(
+    function()
+        FLY_UP = false
+    end
+)
+FLY_UpBtn.MouseLeave:Connect(
+    function()
+        FLY_UP = false
+    end
+)
+FLY_DownBtn.MouseButton1Down:Connect(
+    function()
+        FLY_DOWN = true
+    end
+)
+FLY_DownBtn.MouseButton1Up:Connect(
+    function()
+        FLY_DOWN = false
+    end
+)
+FLY_DownBtn.MouseLeave:Connect(
+    function()
+        FLY_DOWN = false
+    end
+)
+FLY_DRAGGING = false
+FLY_DRAG_INPUT = nil
+FLY_DRAG_START = nil
+FLY_START_POS = nil
+FLY_Frame.InputBegan:Connect(
+    function(ai)
+        if ai.UserInputType == Enum.UserInputType.MouseButton1 or ai.UserInputType == Enum.UserInputType.Touch then
+            FLY_DRAGGING = true
+            FLY_DRAG_INPUT = ai
+            FLY_START_POS = FLY_Frame.Position
+            FLY_DRAG_START =
+                ai.UserInputType == Enum.UserInputType.MouseButton1 and UserInputService:GetMouseLocation() or
+                ai.Position
+        end
+    end
+)
+FLY_Frame.InputEnded:Connect(
+    function(ai)
+        if ai == FLY_DRAG_INPUT then
+            FLY_DRAGGING = false
+            FLY_DRAG_INPUT = nil
+        end
+    end
+)
+UserInputService.InputChanged:Connect(
+    function(ai)
+        if not FLY_DRAGGING then
+            return
+        end
+        if ai.UserInputType == Enum.UserInputType.MouseMovement or ai.UserInputType == Enum.UserInputType.Touch then
+            local pos =
+                ai.UserInputType == Enum.UserInputType.MouseMovement and UserInputService:GetMouseLocation() or
+                ai.Position
+            local eg = pos - FLY_DRAG_START
+            FLY_Frame.Position =
+                UDim2.new(
+                FLY_START_POS.X.Scale,
+                FLY_START_POS.X.Offset + eg.X,
+                FLY_START_POS.Y.Scale,
+                FLY_START_POS.Y.Offset + eg.Y
+            )
+        end
+    end
+)
+bV.Heartbeat:Connect(
+    function()
+        if FLY_ENABLED and Players.LocalPlayer.Character then
+            local char = Players.LocalPlayer.Character
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if hum then
+                if FLY_DEFAULT_WALKSPEED == nil then
+                    FLY_DEFAULT_WALKSPEED = hum.WalkSpeed
+                end
+                hum.WalkSpeed = FLY_SPEED
+            end
+            if hrp then
+                if not FLY_VERT_BV or FLY_VERT_BV.Parent ~= hrp then
+                    if FLY_VERT_BV then
+                        pcall(
+                            function()
+                                FLY_VERT_BV:Destroy()
+                            end
+                        )
+                    end
+                    FLY_VERT_BV = Instance.new("BodyVelocity")
+                    FLY_VERT_BV.Name = "RyZenFly_VertBV"
+                    FLY_VERT_BV.MaxForce = Vector3.new(0, 1e5, 0)
+                    FLY_VERT_BV.Velocity = Vector3.new(0, 0, 0)
+                    FLY_VERT_BV.P = 1250
+                    FLY_VERT_BV.Parent = hrp
+                end
+                local eh = 0
+                if FLY_UP then
+                    eh = FLY_SPEED
+                end
+                if FLY_DOWN then
+                    eh = -FLY_SPEED
+                end
+                FLY_VERT_BV.Velocity = Vector3.new(0, eh, 0)
+            end
+        else
+            if FLY_VERT_BV then
+                pcall(
+                    function()
+                        FLY_VERT_BV:Destroy()
+                    end
+                )
+                FLY_VERT_BV = nil
+            end
+            if Players.LocalPlayer.Character then
+                local hum = Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if hum then
+                    hum.WalkSpeed = FLY_DEFAULT_WALKSPEED or 16
+                end
+            end
+        end
+    end
+)
+Players.LocalPlayer.CharacterAdded:Connect(
+    function(char)
+        task.wait(0.5)
+        if FLY_ENABLED then
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            local hum = char:FindFirstChildOfClass("Humanoid")
+            if hum and FLY_DEFAULT_WALKSPEED == nil then
+                FLY_DEFAULT_WALKSPEED = hum.WalkSpeed
+            end
+            if hum then
+                hum.WalkSpeed = FLY_SPEED
+            end
+            if hrp then
+                if FLY_VERT_BV then
+                    pcall(
+                        function()
+                            FLY_VERT_BV:Destroy()
+                        end
+                    )
+                end
+                FLY_VERT_BV = Instance.new("BodyVelocity")
+                FLY_VERT_BV.Name = "RyZenFly_VertBV"
+                FLY_VERT_BV.MaxForce = Vector3.new(0, 1e5, 0)
+                FLY_VERT_BV.Velocity = Vector3.new(0, 0, 0)
+                FLY_VERT_BV.P = 1250
+                FLY_VERT_BV.Parent = hrp
+            end
+        else
+            if FLY_VERT_BV then
+                pcall(
+                    function()
+                        FLY_VERT_BV:Destroy()
+                    end
+                )
+                FLY_VERT_BV = nil
+            end
+        end
+    end
+)
+LocalPlayerTab:Toggle(
+    {Flag = "AutoTab", Title = "Fly", Desc = "be able to fly", Default = false, Callback = function(U)
+            FLY_GUI.Enabled = U
+        end}
+)
+local ei = r:Tab({Title = "Misc", Icon = "compass", Locked = false})
+ei:Section({Title = "Themes", Desc = "Select Your Themes.", Color = "Blue"})
+ei:Dropdown(
+    {Flag = "AutoTab", Title = "Select Theme", Values = themeNames, Value = "Volcano", Callback = function(ej)
+            b:SetTheme(ej)
+        end}
+)
+ei:Toggle(
+    {
+        Flag = "AutoTab",
+        Title = "Transparent Window",
+        Desc = "Toggle UI transparency on or off",
+        Default = false,
+        Callback = function(U)
+            if U then
+                r:ToggleTransparency(true)
+            else
+                r:ToggleTransparency(false)
+            end
+        end
+    }
+)
+ei:Divider()
+local ad = ei:Section({Title = "Configs (COMING SOON)", Icon = "folder-dot"})
+
+CordTab = Window:Tab({
+    Title = "Coordinates",
+    Icon = "compass"
+})
+
+-- Coordinates Manager (WindUI-friendly)
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService") -- for clipboard encoding if needed
+
+local LocalPlayer = Players.LocalPlayer
+local SavedPositions = {}
+local SelectedPosition = nil
+local ShowCoordinates = false
+local CurrentCoordinates = Vector3.new(0,0,0) -- track last coordinates
+
+-- WindUI reference
+local WindUI = WindUI -- make sure WindUI is loaded
+
+-- Notification helper (detailed)
+local function Notify(title, text, duration)
+    duration = duration or 3
+    if WindUI and type(WindUI.Notify) == "function" then
+        pcall(function()
+            WindUI:Notify({
+                Title = title,
+                Content = text,
+                Duration = duration,
+                Icon = "bird",
+            })
+        end)
+    else
+        StarterGui:SetCore("SendNotification", {
+            Title = title,
+            Text = text,
+            Duration = duration
+        })
+    end
+end
+
+-- Coordinate GUI
+local coordGui = nil
+local coordLabel = nil
+local coordConnection = nil
+
+-- Toggle coordinates display
+local function ToggleCoordinates(enabled)
+    if type(enabled) == "boolean" then
+        ShowCoordinates = enabled
+    else
+        ShowCoordinates = not ShowCoordinates
+    end
+
+    if ShowCoordinates then
+        if not coordGui then
+            coordGui = Instance.new("ScreenGui")
+            coordGui.Name = "CoordsGUI"
+            coordGui.ResetOnSpawn = false
+            coordGui.Parent = game.CoreGui
+
+            coordLabel = Instance.new("TextLabel")
+            coordLabel.Size = UDim2.new(0, 220, 0, 36)
+            coordLabel.Position = UDim2.new(0, 10, 0, 10)
+            coordLabel.BackgroundTransparency = 0.4
+            coordLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+            coordLabel.BorderSizePixel = 0
+            coordLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            coordLabel.TextScaled = true
+            coordLabel.Font = Enum.Font.SourceSansSemibold
+            coordLabel.Text = "X: 0.0  Y: 0.0  Z: 0.0"
+            coordLabel.Parent = coordGui
+        end
+
+        if not coordConnection then
+            coordConnection = RunService.RenderStepped:Connect(function()
+                local char = LocalPlayer.Character
+                local root = char and char:FindFirstChild("HumanoidRootPart")
+                if root then
+                    local p = root.Position
+                    CurrentCoordinates = p
+                    coordLabel.Text = string.format("X: %.2f  Y: %.2f  Z: %.2f", p.X, p.Y, p.Z)
+                    coordLabel.Visible = true
+                else
+                    coordLabel.Text = "No character"
+                end
+            end)
+        end
+    else
+        if coordConnection then
+            coordConnection:Disconnect()
+            coordConnection = nil
+        end
+        if coordGui then
+            coordGui:Destroy()
+            coordGui = nil
+            coordLabel = nil
+        end
+    end
+end
+
+-- Refresh dropdown
+local function RefreshDropdownValues(dropdown)
+    if not dropdown then return end
+    local keys = {}
+    for k in pairs(SavedPositions) do table.insert(keys, k) end
+    table.sort(keys)
+    dropdown:Refresh(keys)
+end
+
+-- Save position
+local function SavePosition(name, dropdown)
+    name = tostring(name or ""):gsub("^%s*(.-)%s*$", "%1")
+    if name == "" then
+        return Notify("Error", "Please enter a name for the coordinate!", 3)
+    end
+
+    local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if not root then
+        return Notify("Error", "HumanoidRootPart not found!", 3)
+    end
+
+    local pos = root.Position
+    SavedPositions[name] = root.CFrame
+    Notify("Saved", string.format("'%s' saved at X: %.2f Y: %.2f Z: %.2f", name, pos.X, pos.Y, pos.Z), 3)
+    RefreshDropdownValues(dropdown)
+end
+
+-- Teleport
+local function TeleportToSaved()
+    if not SelectedPosition or not SavedPositions[SelectedPosition] then
+        return Notify("Error", "Select a saved position first!", 3)
+    end
+
+    local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if root then
+        root.CFrame = SavedPositions[SelectedPosition]
+        local pos = root.Position
+        Notify("Teleported", string.format("Teleported to '%s' at X: %.2f Y: %.2f Z: %.2f", SelectedPosition, pos.X, pos.Y, pos.Z), 3)
+    else
+        Notify("Error", "Couldn't find HumanoidRootPart.", 3)
+    end
+end
+
+-- Delete
+local function DeleteSaved(dropdown)
+    if not SelectedPosition or not SavedPositions[SelectedPosition] then
+        return Notify("Error", "Select a saved position first!", 3)
+    end
+
+    SavedPositions[SelectedPosition] = nil
+    Notify("Deleted", "Deleted coordinate '" .. SelectedPosition .. "'", 2)
+    SelectedPosition = nil
+    RefreshDropdownValues(dropdown)
+end
+
+-- Copy current coordinates
+local function CopyCoordinates()
+    local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if root then
+        local pos = root.Position
+        local coordText = string.format("X: %.2f, Y: %.2f, Z: %.2f", pos.X, pos.Y, pos.Z)
+        -- Roblox clipboard
+        pcall(function() setclipboard(coordText) end)
+        Notify("Copied", "Copied current coordinates to clipboard: " .. coordText, 3)
+    else
+        Notify("Error", "Couldn't find HumanoidRootPart.", 3)
+    end
+end
+
+-- ---------------------------
+-- WindUI integration (UI)
+-- ---------------------------
+local coordinateName = ""
+
+-- Show Coordinates toggle
+CordTab:Toggle({
+    Title = "Show Coordinates",
+    Desc = "Display your current coordinates on screen",
+    Default = false,
+    Callback = function(val) ToggleCoordinates(val) end
+})
+
+CordTab:Space()
+
+-- Name input
+local nameInput = CordTab:Input({
+    Title = "Coordinate Name",
+    Desc = "Enter a name to save your position",
+    Value = "",
+    InputIcon = "bird",
+    Type = "Input",
+    Placeholder = "Enter coordinate name...",
+    Callback = function(input)
+        coordinateName = tostring(input or "")
+    end
+})
+
+-- Save button
+CordTab:Button({
+    Title = "Save Current Position",
+    Desc = "Saves your current position with name",
+    Callback = function()
+        SavePosition(coordinateName, Dropdown)
+    end
+})
+
+CordTab:Space()
+
+-- Copy Coordinates button
+CordTab:Button({
+    Title = "Copy Current Coordinates",
+    Desc = "Copy your current coordinates to clipboard",
+    Callback = CopyCoordinates
+})
+
+-- Dropdown
+Dropdown = CordTab:Dropdown({
+    Title = "Saved Positions",
+    Desc = "Select a saved position",
+    Values = {},
+    Callback = function(selected)
+        SelectedPosition = selected
+    end
+})
+
+CordTab:Space()
+
+-- Teleport button
+CordTab:Button({
+    Title = "Teleport to Saved Position",
+    Desc = "Teleports to the selected saved position",
+    Callback = TeleportToSaved
+})
+
+-- Delete button
+CordTab:Button({
+    Title = "Delete Selected Position",
+    Desc = "Deletes the selected saved position",
+    Callback = function()
+        DeleteSaved(Dropdown)
+    end
+})
+
